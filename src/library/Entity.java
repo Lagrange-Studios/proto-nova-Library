@@ -1,7 +1,6 @@
-package main;
+package library;
 
 public class Entity {
-	
 	private String name;
 	
 	public void setName(String newName) {
