@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 option java_package = "protonova.protobuf";
-option java_outer_classname = "Chunk";
+option java_outer_classname = "ChunkProto";
 
 import "proto.coordinate";
 
