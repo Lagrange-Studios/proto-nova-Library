@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "PlayerDataProto";
+
+message PlayerData {
+  string username = 1;
+  int32 entityId = 2;
+}

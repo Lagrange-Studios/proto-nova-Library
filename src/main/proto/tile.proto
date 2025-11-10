@@ -3,6 +3,9 @@ syntax = "proto3";
 option java_package = "protonova.protobuf";
 option java_outer_classname = "TileProto";
 
+import "coordinate.proto";
+
 message Tile {
   string name = 1;
+  Coordinate coordinate = 2;
 }

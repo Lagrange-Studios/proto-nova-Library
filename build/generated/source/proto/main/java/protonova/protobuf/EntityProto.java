@@ -45,6 +45,12 @@ public final class EntityProto {
      * <code>.Vector position = 2;</code>
      */
     protonova.protobuf.VectorProto.VectorOrBuilder getPositionOrBuilder();
+
+    /**
+     * <code>int32 map = 3;</code>
+     * @return The map.
+     */
+    int getMap();
   }
   /**
    * Protobuf type {@code Entity}
@@ -148,6 +154,17 @@ public final class EntityProto {
       return position_ == null ? protonova.protobuf.VectorProto.Vector.getDefaultInstance() : position_;
     }
 
+    public static final int MAP_FIELD_NUMBER = 3;
+    private int map_ = 0;
+    /**
+     * <code>int32 map = 3;</code>
+     * @return The map.
+     */
+    @java.lang.Override
+    public int getMap() {
+      return map_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -168,6 +185,9 @@ public final class EntityProto {
       if (((bitField0_ & 0x00000001) != 0)) {
         output.writeMessage(2, getPosition());
       }
+      if (map_ != 0) {
+        output.writeInt32(3, map_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -183,6 +203,10 @@ public final class EntityProto {
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getPosition());
+      }
+      if (map_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, map_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -206,6 +230,8 @@ public final class EntityProto {
         if (!getPosition()
             .equals(other.getPosition())) return false;
       }
+      if (getMap()
+          != other.getMap()) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -223,6 +249,8 @@ public final class EntityProto {
         hash = (37 * hash) + POSITION_FIELD_NUMBER;
         hash = (53 * hash) + getPosition().hashCode();
       }
+      hash = (37 * hash) + MAP_FIELD_NUMBER;
+      hash = (53 * hash) + getMap();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -366,6 +394,7 @@ public final class EntityProto {
           positionBuilder_.dispose();
           positionBuilder_ = null;
         }
+        map_ = 0;
         return this;
       }
 
@@ -408,6 +437,9 @@ public final class EntityProto {
               ? position_
               : positionBuilder_.build();
           to_bitField0_ |= 0x00000001;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.map_ = map_;
         }
         result.bitField0_ |= to_bitField0_;
       }
@@ -464,6 +496,9 @@ public final class EntityProto {
         if (other.hasPosition()) {
           mergePosition(other.getPosition());
         }
+        if (other.getMap() != 0) {
+          setMap(other.getMap());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -502,6 +537,11 @@ public final class EntityProto {
                 bitField0_ |= 0x00000002;
                 break;
               } // case 18
+              case 24: {
+                map_ = input.readInt32();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -711,6 +751,38 @@ public final class EntityProto {
         }
         return positionBuilder_;
       }
+
+      private int map_ ;
+      /**
+       * <code>int32 map = 3;</code>
+       * @return The map.
+       */
+      @java.lang.Override
+      public int getMap() {
+        return map_;
+      }
+      /**
+       * <code>int32 map = 3;</code>
+       * @param value The map to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMap(int value) {
+
+        map_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 map = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMap() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        map_ = 0;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -789,10 +861,10 @@ public final class EntityProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014entity.proto\032\014vector.proto\"1\n\006Entity\022\014" +
-      "\n\004name\030\001 \001(\t\022\031\n\010position\030\002 \001(\0132\007.VectorB" +
-      "!\n\022protonova.protobufB\013EntityProtob\006prot" +
-      "o3"
+      "\n\014entity.proto\032\014vector.proto\">\n\006Entity\022\014" +
+      "\n\004name\030\001 \001(\t\022\031\n\010position\030\002 \001(\0132\007.Vector\022" +
+      "\013\n\003map\030\003 \001(\005B!\n\022protonova.protobufB\013Enti" +
+      "tyProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -804,7 +876,7 @@ public final class EntityProto {
     internal_static_Entity_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Entity_descriptor,
-        new java.lang.String[] { "Name", "Position", });
+        new java.lang.String[] { "Name", "Position", "Map", });
     protonova.protobuf.VectorProto.getDescriptor();
   }
 

@@ -5,9 +5,9 @@ option java_outer_classname = "EntityProto";
 
 import "vector.proto";
 
-import "proto.vector"
 
 message Entity {
   string name = 1;
   Vector position = 2;
+  int32 map = 3;
 }

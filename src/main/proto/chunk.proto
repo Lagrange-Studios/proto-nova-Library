@@ -3,7 +3,8 @@ syntax = "proto3";
 option java_package = "protonova.protobuf";
 option java_outer_classname = "ChunkProto";
 
-import "proto.coordinate";
+import "coordinate.proto";
+import "tile.proto";
 
 message Chunk {
   Coordinate coordinate = 1;

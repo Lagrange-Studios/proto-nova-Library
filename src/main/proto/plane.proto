@@ -5,8 +5,6 @@ option java_outer_classname = "PlaneProto";
 
 import "tile.proto";
 
-import "proto.Tile";
-
 message Plane {
   int32 id = 1;
   map<string,Tile> tiles = 2;

@@ -30,6 +30,21 @@ public final class TileProto {
      */
     com.google.protobuf.ByteString
         getNameBytes();
+
+    /**
+     * <code>.Coordinate coordinate = 2;</code>
+     * @return Whether the coordinate field is set.
+     */
+    boolean hasCoordinate();
+    /**
+     * <code>.Coordinate coordinate = 2;</code>
+     * @return The coordinate.
+     */
+    protonova.protobuf.CoordinateProto.Coordinate getCoordinate();
+    /**
+     * <code>.Coordinate coordinate = 2;</code>
+     */
+    protonova.protobuf.CoordinateProto.CoordinateOrBuilder getCoordinateOrBuilder();
   }
   /**
    * Protobuf type {@code Tile}
@@ -67,6 +82,7 @@ public final class TileProto {
               protonova.protobuf.TileProto.Tile.class, protonova.protobuf.TileProto.Tile.Builder.class);
     }
 
+    private int bitField0_;
     public static final int NAME_FIELD_NUMBER = 1;
     @SuppressWarnings("serial")
     private volatile java.lang.Object name_ = "";
@@ -106,6 +122,32 @@ public final class TileProto {
       }
     }
 
+    public static final int COORDINATE_FIELD_NUMBER = 2;
+    private protonova.protobuf.CoordinateProto.Coordinate coordinate_;
+    /**
+     * <code>.Coordinate coordinate = 2;</code>
+     * @return Whether the coordinate field is set.
+     */
+    @java.lang.Override
+    public boolean hasCoordinate() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.Coordinate coordinate = 2;</code>
+     * @return The coordinate.
+     */
+    @java.lang.Override
+    public protonova.protobuf.CoordinateProto.Coordinate getCoordinate() {
+      return coordinate_ == null ? protonova.protobuf.CoordinateProto.Coordinate.getDefaultInstance() : coordinate_;
+    }
+    /**
+     * <code>.Coordinate coordinate = 2;</code>
+     */
+    @java.lang.Override
+    public protonova.protobuf.CoordinateProto.CoordinateOrBuilder getCoordinateOrBuilder() {
+      return coordinate_ == null ? protonova.protobuf.CoordinateProto.Coordinate.getDefaultInstance() : coordinate_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -123,6 +165,9 @@ public final class TileProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
       }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        output.writeMessage(2, getCoordinate());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -134,6 +179,10 @@ public final class TileProto {
       size = 0;
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+      }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getCoordinate());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -152,6 +201,11 @@ public final class TileProto {
 
       if (!getName()
           .equals(other.getName())) return false;
+      if (hasCoordinate() != other.hasCoordinate()) return false;
+      if (hasCoordinate()) {
+        if (!getCoordinate()
+            .equals(other.getCoordinate())) return false;
+      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -165,6 +219,10 @@ public final class TileProto {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
+      if (hasCoordinate()) {
+        hash = (37 * hash) + COORDINATE_FIELD_NUMBER;
+        hash = (53 * hash) + getCoordinate().hashCode();
+      }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -284,19 +342,30 @@ public final class TileProto {
 
       // Construct using protonova.protobuf.TileProto.Tile.newBuilder()
       private Builder() {
-
+        maybeForceBuilderInitialization();
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getCoordinateFieldBuilder();
+        }
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
         name_ = "";
+        coordinate_ = null;
+        if (coordinateBuilder_ != null) {
+          coordinateBuilder_.dispose();
+          coordinateBuilder_ = null;
+        }
         return this;
       }
 
@@ -333,6 +402,14 @@ public final class TileProto {
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.name_ = name_;
         }
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.coordinate_ = coordinateBuilder_ == null
+              ? coordinate_
+              : coordinateBuilder_.build();
+          to_bitField0_ |= 0x00000001;
+        }
+        result.bitField0_ |= to_bitField0_;
       }
 
       @java.lang.Override
@@ -384,6 +461,9 @@ public final class TileProto {
           bitField0_ |= 0x00000001;
           onChanged();
         }
+        if (other.hasCoordinate()) {
+          mergeCoordinate(other.getCoordinate());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -415,6 +495,13 @@ public final class TileProto {
                 bitField0_ |= 0x00000001;
                 break;
               } // case 10
+              case 18: {
+                input.readMessage(
+                    getCoordinateFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -503,6 +590,127 @@ public final class TileProto {
         onChanged();
         return this;
       }
+
+      private protonova.protobuf.CoordinateProto.Coordinate coordinate_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protonova.protobuf.CoordinateProto.Coordinate, protonova.protobuf.CoordinateProto.Coordinate.Builder, protonova.protobuf.CoordinateProto.CoordinateOrBuilder> coordinateBuilder_;
+      /**
+       * <code>.Coordinate coordinate = 2;</code>
+       * @return Whether the coordinate field is set.
+       */
+      public boolean hasCoordinate() {
+        return ((bitField0_ & 0x00000002) != 0);
+      }
+      /**
+       * <code>.Coordinate coordinate = 2;</code>
+       * @return The coordinate.
+       */
+      public protonova.protobuf.CoordinateProto.Coordinate getCoordinate() {
+        if (coordinateBuilder_ == null) {
+          return coordinate_ == null ? protonova.protobuf.CoordinateProto.Coordinate.getDefaultInstance() : coordinate_;
+        } else {
+          return coordinateBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.Coordinate coordinate = 2;</code>
+       */
+      public Builder setCoordinate(protonova.protobuf.CoordinateProto.Coordinate value) {
+        if (coordinateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          coordinate_ = value;
+        } else {
+          coordinateBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.Coordinate coordinate = 2;</code>
+       */
+      public Builder setCoordinate(
+          protonova.protobuf.CoordinateProto.Coordinate.Builder builderForValue) {
+        if (coordinateBuilder_ == null) {
+          coordinate_ = builderForValue.build();
+        } else {
+          coordinateBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.Coordinate coordinate = 2;</code>
+       */
+      public Builder mergeCoordinate(protonova.protobuf.CoordinateProto.Coordinate value) {
+        if (coordinateBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) != 0) &&
+            coordinate_ != null &&
+            coordinate_ != protonova.protobuf.CoordinateProto.Coordinate.getDefaultInstance()) {
+            getCoordinateBuilder().mergeFrom(value);
+          } else {
+            coordinate_ = value;
+          }
+        } else {
+          coordinateBuilder_.mergeFrom(value);
+        }
+        if (coordinate_ != null) {
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>.Coordinate coordinate = 2;</code>
+       */
+      public Builder clearCoordinate() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        coordinate_ = null;
+        if (coordinateBuilder_ != null) {
+          coordinateBuilder_.dispose();
+          coordinateBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.Coordinate coordinate = 2;</code>
+       */
+      public protonova.protobuf.CoordinateProto.Coordinate.Builder getCoordinateBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getCoordinateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.Coordinate coordinate = 2;</code>
+       */
+      public protonova.protobuf.CoordinateProto.CoordinateOrBuilder getCoordinateOrBuilder() {
+        if (coordinateBuilder_ != null) {
+          return coordinateBuilder_.getMessageOrBuilder();
+        } else {
+          return coordinate_ == null ?
+              protonova.protobuf.CoordinateProto.Coordinate.getDefaultInstance() : coordinate_;
+        }
+      }
+      /**
+       * <code>.Coordinate coordinate = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          protonova.protobuf.CoordinateProto.Coordinate, protonova.protobuf.CoordinateProto.Coordinate.Builder, protonova.protobuf.CoordinateProto.CoordinateOrBuilder> 
+          getCoordinateFieldBuilder() {
+        if (coordinateBuilder_ == null) {
+          coordinateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              protonova.protobuf.CoordinateProto.Coordinate, protonova.protobuf.CoordinateProto.Coordinate.Builder, protonova.protobuf.CoordinateProto.CoordinateOrBuilder>(
+                  getCoordinate(),
+                  getParentForChildren(),
+                  isClean());
+          coordinate_ = null;
+        }
+        return coordinateBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -581,19 +789,23 @@ public final class TileProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\ntile.proto\"\024\n\004Tile\022\014\n\004name\030\001 \001(\tB\037\n\022pr" +
-      "otonova.protobufB\tTileProtob\006proto3"
+      "\n\ntile.proto\032\020coordinate.proto\"5\n\004Tile\022\014" +
+      "\n\004name\030\001 \001(\t\022\037\n\ncoordinate\030\002 \001(\0132\013.Coord" +
+      "inateB\037\n\022protonova.protobufB\tTileProtob\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          protonova.protobuf.CoordinateProto.getDescriptor(),
         });
     internal_static_Tile_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_Tile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Tile_descriptor,
-        new java.lang.String[] { "Name", });
+        new java.lang.String[] { "Name", "Coordinate", });
+    protonova.protobuf.CoordinateProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
