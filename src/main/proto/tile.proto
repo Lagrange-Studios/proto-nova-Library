@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 option java_package = "protonova.protobuf";
-option java_outer_classname = "Tile";
+option java_outer_classname = "TileProto";
 
 message Tile {
   string name = 1;
