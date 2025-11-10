@@ -3,7 +3,9 @@ syntax = "proto3";
 option java_package = "protonova.protobuf";
 option java_outer_classname = "Entity";
 
+import "proto.vector"
+
 message Entity {
   string name = 1;
-  vector position = 2;
+  Vector position = 2;
 }
