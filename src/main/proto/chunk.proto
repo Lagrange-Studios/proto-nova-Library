@@ -1,9 +1,9 @@
 syntax = "proto3";
 
 option java_package = "protonova.protobuf";
-option java_outer_classname = "UserDataProto";
+option java_outer_classname = "Chunk";
 
-message Plane {
+message Chunk {
   Coordinate coordinate = 1;
-  List<Tile> tiles = 2;
+  Repeated<Tile> tiles = 2;
 }

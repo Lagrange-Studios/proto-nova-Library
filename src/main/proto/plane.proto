@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 option java_package = "protonova.protobuf";
-option java_outer_classname = "UserDataProto";
+option java_outer_classname = "Plane";
 
 message Plane {
   Int32 id = 1;
