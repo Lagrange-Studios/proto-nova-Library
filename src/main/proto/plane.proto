@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "UserDataProto";
+
+message Plane {
+  Int32 id = 1;
+  map<Coordinate,Tile> tiles = 2;
+}

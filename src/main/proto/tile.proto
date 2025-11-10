@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "UserDataProto";
+
+message Tile {
+  string name = 1;
+}
