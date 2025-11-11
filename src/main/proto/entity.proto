@@ -10,4 +10,5 @@ message Entity {
   string name = 1;
   Vector position = 2;
   int32 map = 3;
+  int32 id = 4;
 }
