@@ -3,6 +3,8 @@ syntax = "proto3";
 option java_package = "protonova.protobuf";
 option java_outer_classname = "ServerToClientPacketProto";
 
+import "entity.proto";
+
 message ServerToClientPacket {
-	
+	Entity playerEntity = 1;
 }

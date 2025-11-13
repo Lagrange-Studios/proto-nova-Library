@@ -3,8 +3,7 @@ syntax = "proto3";
 option java_package = "protonova.protobuf";
 option java_outer_classname = "UserDataProto";
 
-import "entity.proto";
 
 message UserData {
-  Entity playerEntity = 1;
+	string username = 1;
 }
