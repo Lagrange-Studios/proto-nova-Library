@@ -4,7 +4,10 @@ option java_package = "protonova.protobuf";
 option java_outer_classname = "ServerToClientPacketProto";
 
 import "entity.proto";
+import "tile.proto";
 
 message ServerToClientPacket {
 	Entity playerEntity = 1;
+	map<string,Tile> tiles = 2;
+	
 }
