@@ -4,9 +4,9 @@ option java_package = "protonova.protobuf";
 option java_outer_classname = "ChunkProto";
 
 import "coordinate.proto";
-import "tile.proto";
+import "entity.proto";
 
 message Chunk {
   Coordinate coordinate = 1;
-  repeated Tile tiles = 2;
+  repeated Entity entities = 2;
 }
