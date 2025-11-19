@@ -35,28 +35,21 @@ public final class ChunkProto {
     protonova.protobuf.CoordinateProto.CoordinateOrBuilder getCoordinateOrBuilder();
 
     /**
-     * <code>repeated .Tile tiles = 2;</code>
+     * <code>repeated int32 entityIds = 2;</code>
+     * @return A list containing the entityIds.
      */
-    java.util.List<protonova.protobuf.TileProto.Tile> 
-        getTilesList();
+    java.util.List<java.lang.Integer> getEntityIdsList();
     /**
-     * <code>repeated .Tile tiles = 2;</code>
+     * <code>repeated int32 entityIds = 2;</code>
+     * @return The count of entityIds.
      */
-    protonova.protobuf.TileProto.Tile getTiles(int index);
+    int getEntityIdsCount();
     /**
-     * <code>repeated .Tile tiles = 2;</code>
+     * <code>repeated int32 entityIds = 2;</code>
+     * @param index The index of the element to return.
+     * @return The entityIds at the given index.
      */
-    int getTilesCount();
-    /**
-     * <code>repeated .Tile tiles = 2;</code>
-     */
-    java.util.List<? extends protonova.protobuf.TileProto.TileOrBuilder> 
-        getTilesOrBuilderList();
-    /**
-     * <code>repeated .Tile tiles = 2;</code>
-     */
-    protonova.protobuf.TileProto.TileOrBuilder getTilesOrBuilder(
-        int index);
+    int getEntityIds(int index);
   }
   /**
    * Protobuf type {@code Chunk}
@@ -71,7 +64,7 @@ public final class ChunkProto {
       super(builder);
     }
     private Chunk() {
-      tiles_ = java.util.Collections.emptyList();
+      entityIds_ = emptyIntList();
     }
 
     @java.lang.Override
@@ -121,46 +114,35 @@ public final class ChunkProto {
       return coordinate_ == null ? protonova.protobuf.CoordinateProto.Coordinate.getDefaultInstance() : coordinate_;
     }
 
-    public static final int TILES_FIELD_NUMBER = 2;
+    public static final int ENTITYIDS_FIELD_NUMBER = 2;
     @SuppressWarnings("serial")
-    private java.util.List<protonova.protobuf.TileProto.Tile> tiles_;
+    private com.google.protobuf.Internal.IntList entityIds_ =
+        emptyIntList();
     /**
-     * <code>repeated .Tile tiles = 2;</code>
+     * <code>repeated int32 entityIds = 2;</code>
+     * @return A list containing the entityIds.
      */
     @java.lang.Override
-    public java.util.List<protonova.protobuf.TileProto.Tile> getTilesList() {
-      return tiles_;
+    public java.util.List<java.lang.Integer>
+        getEntityIdsList() {
+      return entityIds_;
     }
     /**
-     * <code>repeated .Tile tiles = 2;</code>
+     * <code>repeated int32 entityIds = 2;</code>
+     * @return The count of entityIds.
      */
-    @java.lang.Override
-    public java.util.List<? extends protonova.protobuf.TileProto.TileOrBuilder> 
-        getTilesOrBuilderList() {
-      return tiles_;
+    public int getEntityIdsCount() {
+      return entityIds_.size();
     }
     /**
-     * <code>repeated .Tile tiles = 2;</code>
+     * <code>repeated int32 entityIds = 2;</code>
+     * @param index The index of the element to return.
+     * @return The entityIds at the given index.
      */
-    @java.lang.Override
-    public int getTilesCount() {
-      return tiles_.size();
+    public int getEntityIds(int index) {
+      return entityIds_.getInt(index);
     }
-    /**
-     * <code>repeated .Tile tiles = 2;</code>
-     */
-    @java.lang.Override
-    public protonova.protobuf.TileProto.Tile getTiles(int index) {
-      return tiles_.get(index);
-    }
-    /**
-     * <code>repeated .Tile tiles = 2;</code>
-     */
-    @java.lang.Override
-    public protonova.protobuf.TileProto.TileOrBuilder getTilesOrBuilder(
-        int index) {
-      return tiles_.get(index);
-    }
+    private int entityIdsMemoizedSerializedSize = -1;
 
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
@@ -176,11 +158,16 @@ public final class ChunkProto {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) != 0)) {
         output.writeMessage(1, getCoordinate());
       }
-      for (int i = 0; i < tiles_.size(); i++) {
-        output.writeMessage(2, tiles_.get(i));
+      if (getEntityIdsList().size() > 0) {
+        output.writeUInt32NoTag(18);
+        output.writeUInt32NoTag(entityIdsMemoizedSerializedSize);
+      }
+      for (int i = 0; i < entityIds_.size(); i++) {
+        output.writeInt32NoTag(entityIds_.getInt(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -195,9 +182,19 @@ public final class ChunkProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getCoordinate());
       }
-      for (int i = 0; i < tiles_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, tiles_.get(i));
+      {
+        int dataSize = 0;
+        for (int i = 0; i < entityIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(entityIds_.getInt(i));
+        }
+        size += dataSize;
+        if (!getEntityIdsList().isEmpty()) {
+          size += 1;
+          size += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(dataSize);
+        }
+        entityIdsMemoizedSerializedSize = dataSize;
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -219,8 +216,8 @@ public final class ChunkProto {
         if (!getCoordinate()
             .equals(other.getCoordinate())) return false;
       }
-      if (!getTilesList()
-          .equals(other.getTilesList())) return false;
+      if (!getEntityIdsList()
+          .equals(other.getEntityIdsList())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -236,9 +233,9 @@ public final class ChunkProto {
         hash = (37 * hash) + COORDINATE_FIELD_NUMBER;
         hash = (53 * hash) + getCoordinate().hashCode();
       }
-      if (getTilesCount() > 0) {
-        hash = (37 * hash) + TILES_FIELD_NUMBER;
-        hash = (53 * hash) + getTilesList().hashCode();
+      if (getEntityIdsCount() > 0) {
+        hash = (37 * hash) + ENTITYIDS_FIELD_NUMBER;
+        hash = (53 * hash) + getEntityIdsList().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -371,7 +368,6 @@ public final class ChunkProto {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
           getCoordinateFieldBuilder();
-          getTilesFieldBuilder();
         }
       }
       @java.lang.Override
@@ -383,13 +379,7 @@ public final class ChunkProto {
           coordinateBuilder_.dispose();
           coordinateBuilder_ = null;
         }
-        if (tilesBuilder_ == null) {
-          tiles_ = java.util.Collections.emptyList();
-        } else {
-          tiles_ = null;
-          tilesBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
+        entityIds_ = emptyIntList();
         return this;
       }
 
@@ -416,22 +406,9 @@ public final class ChunkProto {
       @java.lang.Override
       public protonova.protobuf.ChunkProto.Chunk buildPartial() {
         protonova.protobuf.ChunkProto.Chunk result = new protonova.protobuf.ChunkProto.Chunk(this);
-        buildPartialRepeatedFields(result);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
-      }
-
-      private void buildPartialRepeatedFields(protonova.protobuf.ChunkProto.Chunk result) {
-        if (tilesBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0)) {
-            tiles_ = java.util.Collections.unmodifiableList(tiles_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.tiles_ = tiles_;
-        } else {
-          result.tiles_ = tilesBuilder_.build();
-        }
       }
 
       private void buildPartial0(protonova.protobuf.ChunkProto.Chunk result) {
@@ -442,6 +419,10 @@ public final class ChunkProto {
               ? coordinate_
               : coordinateBuilder_.build();
           to_bitField0_ |= 0x00000001;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          entityIds_.makeImmutable();
+          result.entityIds_ = entityIds_;
         }
         result.bitField0_ |= to_bitField0_;
       }
@@ -493,31 +474,16 @@ public final class ChunkProto {
         if (other.hasCoordinate()) {
           mergeCoordinate(other.getCoordinate());
         }
-        if (tilesBuilder_ == null) {
-          if (!other.tiles_.isEmpty()) {
-            if (tiles_.isEmpty()) {
-              tiles_ = other.tiles_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureTilesIsMutable();
-              tiles_.addAll(other.tiles_);
-            }
-            onChanged();
+        if (!other.entityIds_.isEmpty()) {
+          if (entityIds_.isEmpty()) {
+            entityIds_ = other.entityIds_;
+            entityIds_.makeImmutable();
+            bitField0_ |= 0x00000002;
+          } else {
+            ensureEntityIdsIsMutable();
+            entityIds_.addAll(other.entityIds_);
           }
-        } else {
-          if (!other.tiles_.isEmpty()) {
-            if (tilesBuilder_.isEmpty()) {
-              tilesBuilder_.dispose();
-              tilesBuilder_ = null;
-              tiles_ = other.tiles_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              tilesBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getTilesFieldBuilder() : null;
-            } else {
-              tilesBuilder_.addAllMessages(other.tiles_);
-            }
-          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
@@ -552,17 +518,20 @@ public final class ChunkProto {
                 bitField0_ |= 0x00000001;
                 break;
               } // case 10
+              case 16: {
+                int v = input.readInt32();
+                ensureEntityIdsIsMutable();
+                entityIds_.addInt(v);
+                break;
+              } // case 16
               case 18: {
-                protonova.protobuf.TileProto.Tile m =
-                    input.readMessage(
-                        protonova.protobuf.TileProto.Tile.parser(),
-                        extensionRegistry);
-                if (tilesBuilder_ == null) {
-                  ensureTilesIsMutable();
-                  tiles_.add(m);
-                } else {
-                  tilesBuilder_.addMessage(m);
+                int length = input.readRawVarint32();
+                int limit = input.pushLimit(length);
+                ensureEntityIdsIsMutable();
+                while (input.getBytesUntilLimit() > 0) {
+                  entityIds_.addInt(input.readInt32());
                 }
+                input.popLimit(limit);
                 break;
               } // case 18
               default: {
@@ -703,244 +672,88 @@ public final class ChunkProto {
         return coordinateBuilder_;
       }
 
-      private java.util.List<protonova.protobuf.TileProto.Tile> tiles_ =
-        java.util.Collections.emptyList();
-      private void ensureTilesIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
-          tiles_ = new java.util.ArrayList<protonova.protobuf.TileProto.Tile>(tiles_);
-          bitField0_ |= 0x00000002;
-         }
+      private com.google.protobuf.Internal.IntList entityIds_ = emptyIntList();
+      private void ensureEntityIdsIsMutable() {
+        if (!entityIds_.isModifiable()) {
+          entityIds_ = makeMutableCopy(entityIds_);
+        }
+        bitField0_ |= 0x00000002;
       }
+      /**
+       * <code>repeated int32 entityIds = 2;</code>
+       * @return A list containing the entityIds.
+       */
+      public java.util.List<java.lang.Integer>
+          getEntityIdsList() {
+        entityIds_.makeImmutable();
+        return entityIds_;
+      }
+      /**
+       * <code>repeated int32 entityIds = 2;</code>
+       * @return The count of entityIds.
+       */
+      public int getEntityIdsCount() {
+        return entityIds_.size();
+      }
+      /**
+       * <code>repeated int32 entityIds = 2;</code>
+       * @param index The index of the element to return.
+       * @return The entityIds at the given index.
+       */
+      public int getEntityIds(int index) {
+        return entityIds_.getInt(index);
+      }
+      /**
+       * <code>repeated int32 entityIds = 2;</code>
+       * @param index The index to set the value at.
+       * @param value The entityIds to set.
+       * @return This builder for chaining.
+       */
+      public Builder setEntityIds(
+          int index, int value) {
 
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          protonova.protobuf.TileProto.Tile, protonova.protobuf.TileProto.Tile.Builder, protonova.protobuf.TileProto.TileOrBuilder> tilesBuilder_;
+        ensureEntityIdsIsMutable();
+        entityIds_.setInt(index, value);
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 entityIds = 2;</code>
+       * @param value The entityIds to add.
+       * @return This builder for chaining.
+       */
+      public Builder addEntityIds(int value) {
 
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public java.util.List<protonova.protobuf.TileProto.Tile> getTilesList() {
-        if (tilesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(tiles_);
-        } else {
-          return tilesBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public int getTilesCount() {
-        if (tilesBuilder_ == null) {
-          return tiles_.size();
-        } else {
-          return tilesBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public protonova.protobuf.TileProto.Tile getTiles(int index) {
-        if (tilesBuilder_ == null) {
-          return tiles_.get(index);
-        } else {
-          return tilesBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public Builder setTiles(
-          int index, protonova.protobuf.TileProto.Tile value) {
-        if (tilesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureTilesIsMutable();
-          tiles_.set(index, value);
-          onChanged();
-        } else {
-          tilesBuilder_.setMessage(index, value);
-        }
+        ensureEntityIdsIsMutable();
+        entityIds_.addInt(value);
+        bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .Tile tiles = 2;</code>
+       * <code>repeated int32 entityIds = 2;</code>
+       * @param values The entityIds to add.
+       * @return This builder for chaining.
        */
-      public Builder setTiles(
-          int index, protonova.protobuf.TileProto.Tile.Builder builderForValue) {
-        if (tilesBuilder_ == null) {
-          ensureTilesIsMutable();
-          tiles_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          tilesBuilder_.setMessage(index, builderForValue.build());
-        }
+      public Builder addAllEntityIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureEntityIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, entityIds_);
+        bitField0_ |= 0x00000002;
+        onChanged();
         return this;
       }
       /**
-       * <code>repeated .Tile tiles = 2;</code>
+       * <code>repeated int32 entityIds = 2;</code>
+       * @return This builder for chaining.
        */
-      public Builder addTiles(protonova.protobuf.TileProto.Tile value) {
-        if (tilesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureTilesIsMutable();
-          tiles_.add(value);
-          onChanged();
-        } else {
-          tilesBuilder_.addMessage(value);
-        }
+      public Builder clearEntityIds() {
+        entityIds_ = emptyIntList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
         return this;
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public Builder addTiles(
-          int index, protonova.protobuf.TileProto.Tile value) {
-        if (tilesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureTilesIsMutable();
-          tiles_.add(index, value);
-          onChanged();
-        } else {
-          tilesBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public Builder addTiles(
-          protonova.protobuf.TileProto.Tile.Builder builderForValue) {
-        if (tilesBuilder_ == null) {
-          ensureTilesIsMutable();
-          tiles_.add(builderForValue.build());
-          onChanged();
-        } else {
-          tilesBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public Builder addTiles(
-          int index, protonova.protobuf.TileProto.Tile.Builder builderForValue) {
-        if (tilesBuilder_ == null) {
-          ensureTilesIsMutable();
-          tiles_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          tilesBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public Builder addAllTiles(
-          java.lang.Iterable<? extends protonova.protobuf.TileProto.Tile> values) {
-        if (tilesBuilder_ == null) {
-          ensureTilesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, tiles_);
-          onChanged();
-        } else {
-          tilesBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public Builder clearTiles() {
-        if (tilesBuilder_ == null) {
-          tiles_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          tilesBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public Builder removeTiles(int index) {
-        if (tilesBuilder_ == null) {
-          ensureTilesIsMutable();
-          tiles_.remove(index);
-          onChanged();
-        } else {
-          tilesBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public protonova.protobuf.TileProto.Tile.Builder getTilesBuilder(
-          int index) {
-        return getTilesFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public protonova.protobuf.TileProto.TileOrBuilder getTilesOrBuilder(
-          int index) {
-        if (tilesBuilder_ == null) {
-          return tiles_.get(index);  } else {
-          return tilesBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public java.util.List<? extends protonova.protobuf.TileProto.TileOrBuilder> 
-           getTilesOrBuilderList() {
-        if (tilesBuilder_ != null) {
-          return tilesBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(tiles_);
-        }
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public protonova.protobuf.TileProto.Tile.Builder addTilesBuilder() {
-        return getTilesFieldBuilder().addBuilder(
-            protonova.protobuf.TileProto.Tile.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public protonova.protobuf.TileProto.Tile.Builder addTilesBuilder(
-          int index) {
-        return getTilesFieldBuilder().addBuilder(
-            index, protonova.protobuf.TileProto.Tile.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Tile tiles = 2;</code>
-       */
-      public java.util.List<protonova.protobuf.TileProto.Tile.Builder> 
-           getTilesBuilderList() {
-        return getTilesFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          protonova.protobuf.TileProto.Tile, protonova.protobuf.TileProto.Tile.Builder, protonova.protobuf.TileProto.TileOrBuilder> 
-          getTilesFieldBuilder() {
-        if (tilesBuilder_ == null) {
-          tilesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              protonova.protobuf.TileProto.Tile, protonova.protobuf.TileProto.Tile.Builder, protonova.protobuf.TileProto.TileOrBuilder>(
-                  tiles_,
-                  ((bitField0_ & 0x00000002) != 0),
-                  getParentForChildren(),
-                  isClean());
-          tiles_ = null;
-        }
-        return tilesBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1020,25 +833,25 @@ public final class ChunkProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013chunk.proto\032\020coordinate.proto\032\ntile.pr" +
-      "oto\">\n\005Chunk\022\037\n\ncoordinate\030\001 \001(\0132\013.Coord" +
-      "inate\022\024\n\005tiles\030\002 \003(\0132\005.TileB \n\022protonova" +
-      ".protobufB\nChunkProtob\006proto3"
+      "\n\013chunk.proto\032\020coordinate.proto\032\014entity." +
+      "proto\";\n\005Chunk\022\037\n\ncoordinate\030\001 \001(\0132\013.Coo" +
+      "rdinate\022\021\n\tentityIds\030\002 \003(\005B \n\022protonova." +
+      "protobufB\nChunkProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           protonova.protobuf.CoordinateProto.getDescriptor(),
-          protonova.protobuf.TileProto.getDescriptor(),
+          protonova.protobuf.EntityProto.getDescriptor(),
         });
     internal_static_Chunk_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_Chunk_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Chunk_descriptor,
-        new java.lang.String[] { "Coordinate", "Tiles", });
+        new java.lang.String[] { "Coordinate", "EntityIds", });
     protonova.protobuf.CoordinateProto.getDescriptor();
-    protonova.protobuf.TileProto.getDescriptor();
+    protonova.protobuf.EntityProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
