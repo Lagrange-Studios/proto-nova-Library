@@ -5,7 +5,6 @@ option java_outer_classname = "EntityProto";
 
 import "vector.proto";
 
-
 message Entity {
   string name = 1;
   Vector position = 2;

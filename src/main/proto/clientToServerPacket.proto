@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "ClientToServerPacketProto";
+
+import "entity.proto";
+
+message ClientToServerPacket {
+	Entity updatedEntity = 1;
+}

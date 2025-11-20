@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "GridProto";
+
+import "tile.proto";
+import "vector.proto";
+
+message Grid {
+  int32 id = 1;
+  int32 map = 2;
+  Vector position = 3;
+  map<string,Tile> tiles = 4;
+}

@@ -4,7 +4,6 @@ option java_package = "protonova.protobuf";
 option java_outer_classname = "ChunkProto";
 
 import "coordinate.proto";
-import "entity.proto";
 
 message Chunk {
   Coordinate coordinate = 1;
