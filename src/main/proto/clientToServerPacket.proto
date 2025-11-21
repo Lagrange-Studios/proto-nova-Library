@@ -7,4 +7,5 @@ import "entity.proto";
 
 message ClientToServerPacket {
 	Entity updatedEntity = 1;
+	repeated string keys = 2;
 }
