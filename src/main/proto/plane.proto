@@ -4,8 +4,10 @@ option java_package = "protonova.protobuf";
 option java_outer_classname = "PlaneProto";
 
 import "tile.proto";
+import "coordinate.proto";
 
 message Plane {
   int32 id = 1;
   map<string,Tile> tiles = 2;
+  Coordinate size = 3;
 }
