@@ -39,14 +39,35 @@ public class VectorMath {
 	}
 	
 	/**
+	 * Returns the dot product of two vectors
+	 * x1*x2+y1*y2
+	 */	
+	public static double dotProduct(Vector vector1, Vector vector2) {
+		return vector1.getX()*vector2.getX() + vector1.getY()*vector2.getY();
+	}
+	
+	/**
 	 * Returns the scalar in radians 0-PI between two vectors also know the the angle of change
 	 * arccos((x1*x2+y1*y2)/ (magnitude(v1)*magnitude(v2)))
 	 */
 	public static double scalar(Vector position1, Vector position2) {
 		
-		double dotProduct = position1.getX() * position2.getX() + position1.getY() * position2.getY();
+		double dotProduct = dotProduct(position1,position2);
 		
 		return Math.acos(dotProduct / (magnitude(position1) * magnitude(position2)));
+	}
+	
+	public static double findAngle(Vector position1, Vector position2) {
+
+		double magnitude1 = magnitude(position1);
+		double magnitude2 = magnitude(position2);
+		double magnitude3 = magnitude(vectorDistance(position1,position2));
+		
+		return Math.acos((Math.pow(magnitude3,2)-Math.pow(magnitude2,2)-Math.pow(magnitude1,2))/(-2*magnitude1*magnitude2));
+	}
+	
+	public static double findAngle(Vector position) {
+		return Math.atan(position.getY()/position.getX());
 	}
 	
 	/**
