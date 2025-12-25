@@ -10,4 +10,6 @@ message Entity {
   Vector position = 2;
   int32 map = 3;
   int32 id = 4;
+  double speed = 5;
+  Vector velocity = 6;
 }

@@ -10,4 +10,5 @@ message ServerToClientPacket {
 	int32 mindId = 1;
 	map<string,Tile> tiles = 2;
 	repeated Entity entities = 3;
+	bool reconcile = 4;
 }

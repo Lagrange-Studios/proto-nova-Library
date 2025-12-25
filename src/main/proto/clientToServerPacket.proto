@@ -4,8 +4,9 @@ option java_package = "protonova.protobuf";
 option java_outer_classname = "ClientToServerPacketProto";
 
 import "entity.proto";
+import "action.proto";
 
 message ClientToServerPacket {
 	Entity updatedEntity = 1;
-	repeated string keys = 2;
+	repeated Action actions = 2;
 }

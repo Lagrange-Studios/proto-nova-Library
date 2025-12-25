@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "ActionProto";
+
+enum ActionType {
+  MoveUp = 0;
+  MoveDown = 1;
+  MoveLeft = 2;
+  MoveRight = 3;
+  Interact = 4;
+}
+
+message Action {
+	ActionType actionType = 1;
+}
