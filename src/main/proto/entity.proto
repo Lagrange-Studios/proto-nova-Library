@@ -13,4 +13,5 @@ message Entity {
   double speed = 5;
   Vector velocity = 6;
   bool item = 7;
+  map<string,int32> hands = 8;
 }
