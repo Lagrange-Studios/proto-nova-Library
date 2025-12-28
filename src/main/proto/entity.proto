@@ -12,4 +12,5 @@ message Entity {
   int32 id = 4;
   double speed = 5;
   Vector velocity = 6;
+  bool item = 7;
 }
