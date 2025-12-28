@@ -9,6 +9,8 @@ enum ActionType {
   MoveLeft = 2;
   MoveRight = 3;
   Interact = 4;
+  StopX = 5;
+  StopY = 6;
 }
 
 message Action {

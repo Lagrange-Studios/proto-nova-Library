@@ -7,13 +7,19 @@ import protonova.protobuf.VectorProto.Vector;
 import util.VectorMath;
 
 public class EntitySimulation {
-	public static Entity simulateMovement(Entity entity, int TPS, Action action) {
+	
+	public static final int TPS = 60;
+	
+	/**
+	 * Should be called for every key input
+	 */
+	public static Entity simulateMovement(Entity entity, Action action) {
 		Vector velocity = entity.getVelocity();
 		float speed = (float) entity.getSpeed();
 		float acceleration = speed/(TPS);
 		
-		float newX = 0;
-		float newY = 0;
+		float newX = velocity.getX();
+		float newY = velocity.getY();
 		
 		
 		switch(action.getActionType().getNumber()) {
@@ -37,23 +43,28 @@ public class EntitySimulation {
 					newX = Math.max(velocity.getX()-acceleration, -speed);
 				}
 				break;
+			case ActionType.StopX_VALUE:
+				newX = Math.abs(velocity.getX())>acceleration?velocity.getX()-Math.copySign(acceleration, velocity.getX()):0;
+				break;
+			case ActionType.StopY_VALUE:
+				newY = Math.abs(velocity.getY())>acceleration?velocity.getY()-Math.copySign(acceleration, velocity.getY()):0;
+				break;
 		}
 		
-		// the entity slows if it dosent want to move
-		if (newY == 0 && velocity.getY() != 0 ) {
-			newY = Math.abs(velocity.getY())>acceleration?velocity.getY()-Math.copySign(acceleration, velocity.getY()):0;
-		}
-		if (newX == 0 && velocity.getX() != 0 ) {
-			newX = Math.abs(velocity.getX())>acceleration?velocity.getX()-Math.copySign(acceleration, velocity.getX()):0;
-		}
-		
-		// apply keys
+		// apply velocity changes
 		velocity = Vector.newBuilder()
 				.setX(newX)
 				.setY(newY)
 				.build();
 		
-		Vector unitVector = newX != 0 || newY != 0?VectorMath.unitVector(velocity): 
+		return entity.toBuilder()
+				.setVelocity(velocity)
+				.build();
+	}
+	
+	public static Entity simulateVelocity(Entity entity) {
+		
+		Vector unitVector = entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0?VectorMath.unitVector(entity.getVelocity()): 
 			Vector.newBuilder()
 			.setX(0)
 			.setY(0)
@@ -65,8 +76,8 @@ public class EntitySimulation {
 				.build();
 		
 		return entity.toBuilder()
-				.setVelocity(velocity)
 				.setPosition(position)
 				.build();
+		
 	}
 }
