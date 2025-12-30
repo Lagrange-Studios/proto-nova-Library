@@ -13,7 +13,7 @@ public class ImageConverter {
     	int y = 0;
     	int x = 0;
     	if (imageNumber > 2) {
-    		x = imageNumber - 1;
+    		x = imageNumber - 3;
     		y = 1;
     	} else {
     		x = imageNumber - 1;
