@@ -9,6 +9,7 @@ import protonova.protobuf.VectorProto.Vector;
 public class Main {
 
 	public static void main(String[] args) {
+		
 		/*Vector pos1 = Vector.newBuilder()
     			.setX(3)
     			.setY(3)
