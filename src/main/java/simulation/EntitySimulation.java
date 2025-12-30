@@ -9,6 +9,7 @@ import util.VectorMath;
 public class EntitySimulation {
 	
 	public static final int TPS = 60;
+	public static final float accelerationModifer = 0.5f;
 	
 	/**
 	 * Should be called for every key input
@@ -16,7 +17,7 @@ public class EntitySimulation {
 	public static Entity simulateMovement(Entity entity, Action action) {
 		Vector velocity = entity.getVelocity();
 		float speed = (float) entity.getSpeed();
-		float acceleration = speed/(TPS);
+		float acceleration = speed*accelerationModifer;
 		
 		float newX = velocity.getX();
 		float newY = velocity.getY();
