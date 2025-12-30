@@ -9,7 +9,7 @@ import util.VectorMath;
 public class EntitySimulation {
 	
 	public static final int TPS = 60;
-	public static final float accelerationModifer = 0.5f;
+	public static final float accelerationModifer = 0.95f;
 	
 	/**
 	 * Should be called for every key input
@@ -72,8 +72,8 @@ public class EntitySimulation {
 			.build();
 		
 		Vector position = Vector.newBuilder()
-				.setX(entity.getPosition().getX() + unitVector.getX()/TPS)
-				.setY(entity.getPosition().getY() + unitVector.getY()/TPS)
+				.setX((float) (entity.getPosition().getX() + entity.getSpeed()*unitVector.getX()/TPS))
+				.setY((float) (entity.getPosition().getY() + entity.getSpeed()*unitVector.getY()/TPS))
 				.build();
 		
 		return entity.toBuilder()
