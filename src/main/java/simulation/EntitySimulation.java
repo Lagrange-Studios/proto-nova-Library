@@ -2,6 +2,7 @@ package simulation;
 
 import protonova.protobuf.ActionProto.Action;
 import protonova.protobuf.ActionProto.ActionType;
+import protonova.protobuf.EntityProto.Direction;
 import protonova.protobuf.EntityProto.Entity;
 import protonova.protobuf.VectorProto.Vector;
 import util.VectorMath;
@@ -22,24 +23,30 @@ public class EntitySimulation {
 		float newX = velocity.getX();
 		float newY = velocity.getY();
 		
+		Direction direction = entity.getDirection();
+		
 		
 		switch(action.getActionType().getNumber()) {
 			case ActionType.MoveUp_VALUE:
+				direction = Direction.Up;
 				if (velocity.getY() < speed) {
 					newY = Math.min(velocity.getY()+acceleration, speed);
 				}
 				break;
 			case ActionType.MoveDown_VALUE:
+				direction = Direction.Down;
 				if (velocity.getY() > -speed) {
 					newY = Math.max(velocity.getY()-acceleration, -speed);
 				}
 				break;
 			case ActionType.MoveRight_VALUE:
+				direction = Direction.Right;
 				if (velocity.getX() < speed) {
 					newX = Math.min(velocity.getX()+acceleration, speed);
 				}
 				break;
 			case ActionType.MoveLeft_VALUE:
+				direction = Direction.Left;
 				if (velocity.getX() > -speed) {
 					newX = Math.max(velocity.getX()-acceleration, -speed);
 				}
@@ -60,6 +67,7 @@ public class EntitySimulation {
 		
 		return entity.toBuilder()
 				.setVelocity(velocity)
+				.setDirection(direction)
 				.build();
 	}
 	
