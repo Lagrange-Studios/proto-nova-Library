@@ -8,4 +8,5 @@ import "coordinate.proto";
 message Tile {
   string name = 1;
   Coordinate coordinate = 2;
+  int32 variant = 3;
 }
