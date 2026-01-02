@@ -22,4 +22,13 @@ public class CoordinateConverter {
 		
 		return coordinate;
 	}
+	
+	public static Vector toVector(Coordinate coordinate) {
+		Vector vector = Vector.newBuilder()
+				.setX(coordinate.getX())
+				.setY(coordinate.getY())
+				.build();
+				
+		return vector;
+	}
 }
