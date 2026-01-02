@@ -25,4 +25,6 @@ message Entity {
   bool anchored = 9;
   bool canCollide = 10;
   Direction direction = 11;
+  int32 health = 12;
+  int32 maxHealth = 13;
 }
