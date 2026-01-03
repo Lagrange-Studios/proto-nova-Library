@@ -21,11 +21,12 @@ message Entity {
   double speed = 5;
   Vector velocity = 6;
   bool item = 7;
-  map<string,int32> hands = 8;
+  map<string,int32> inventory = 8;
   bool anchored = 9;
   bool canCollide = 10;
   Direction direction = 11;
   int32 health = 12;
   int32 maxHealth = 13;
   Vector size = 14;
+  int32 selected = 15;
 }
