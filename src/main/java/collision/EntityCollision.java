@@ -17,30 +17,27 @@ public class EntityCollision {
 		float centerX = entity.getPosition().getX();
 		float centerY = entity.getPosition().getY();
 		
-		//TODO: take into account entity rotation and size
-		/*for (int x=-1;x<=1;x+=2) {
-			for (int y=-1;y<=1;y+=2) {
-				corners.add(Vector.newBuilder()
-						.setX((float) (centerX + 0.5*x))
-						.setY((float) (centerY + 0.5*y))
-						.build());
-			}
-		}*/
+		float sizeX = entity.getSize().getX();
+		float sizeY = entity.getSize().getY();
+		
+		//TODO: take into account entity rotation
+		
+		
 		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + 0.5*-1))
-				.setY((float) (centerY + 0.5*-1))
+				.setX((float) (centerX + 0.5*-sizeX))
+				.setY((float) (centerY + 0.5*-sizeY))
 				.build());
 		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + 0.5*1))
-				.setY((float) (centerY + 0.5*-1))
+				.setX((float) (centerX + 0.5*sizeX))
+				.setY((float) (centerY + 0.5*-sizeY))
 				.build());
 		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + 0.5*1))
-				.setY((float) (centerY + 0.5*1))
+				.setX((float) (centerX + 0.5*sizeX))
+				.setY((float) (centerY + 0.5*sizeY))
 				.build());
 		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + 0.5*-1))
-				.setY((float) (centerY + 0.5*1))
+				.setX((float) (centerX + 0.5*-sizeX))
+				.setY((float) (centerY + 0.5*sizeY))
 				.build());
 		
 		
