@@ -10,22 +10,29 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		/*Vector pos1 = Vector.newBuilder()
-    			.setX(3)
-    			.setY(3)
+		Vector size = Vector.newBuilder()
+				.setX(1)
+				.setY(1)
+				.build();
+		
+		Vector pos1 = Vector.newBuilder()
+    			.setX(-38.0f)
+    			.setY(15)
     			.build();
     	
     	Entity entity1 = Entity.newBuilder()
     			.setPosition(pos1)
+    			.setSize(size)
     			.build();
     	
     	Vector pos2 = Vector.newBuilder()
-    			.setX(3)
-    			.setY(3)
+    			.setX(-38.911484f)
+    			.setY(15.213504f)
     			.build();
     	
     	Entity entity2 = Entity.newBuilder()
     			.setPosition(pos2)
+    			.setSize(size)
     			.build();
     	
     	long startTime = System.currentTimeMillis();
@@ -36,7 +43,7 @@ public class Main {
     	catch(Exception e) {
     		e.printStackTrace();
     	}
-    	System.out.println("Operation took: "+(System.currentTimeMillis()-startTime)+" miliseconds");*/
+    	System.out.println("Operation took: "+(System.currentTimeMillis()-startTime)+" miliseconds");
 		/*
 		int amount = 10000000;
     	int range = 1000;
