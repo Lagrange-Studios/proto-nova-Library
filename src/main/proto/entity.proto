@@ -20,7 +20,7 @@ message Entity {
   int32 id = 4;
   double speed = 5;
   Vector velocity = 6;
-  bool item = 7;
+  bool isItem = 7;
   map<string,int32> inventorySlots = 8;
   bool anchored = 9;
   bool canCollide = 10;
@@ -29,4 +29,6 @@ message Entity {
   int32 maxHealth = 13;
   Vector size = 14;
   string selectedSlot = 15;
+  optional bool stackable = 16;
+  optional int32 amount = 17;
 }
