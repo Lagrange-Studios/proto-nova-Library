@@ -8,7 +8,7 @@ import util.VectorMath;
 
 public class EntityCollision {
 
-	private static int roundPlaces = 100000;
+	private static int roundPlaces = 1000000000;
 	
 	private static ArrayList<Vector> getCorners(Entity entity) {
 		
@@ -24,20 +24,20 @@ public class EntityCollision {
 		
 		
 		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + 0.5*-sizeX))
-				.setY((float) (centerY + 0.5*-sizeY))
+				.setX((float) (centerX + (0.5*-sizeX)))
+				.setY((float) (centerY + (0.5*-sizeY)))
 				.build());
 		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + 0.5*sizeX))
-				.setY((float) (centerY + 0.5*-sizeY))
+				.setX((float) (centerX + (0.5*sizeX)))
+				.setY((float) (centerY + (0.5*-sizeY)))
 				.build());
 		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + 0.5*sizeX))
-				.setY((float) (centerY + 0.5*sizeY))
+				.setX((float) (centerX + (0.5*sizeX)))
+				.setY((float) (centerY + (0.5*sizeY)))
 				.build());
 		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + 0.5*-sizeX))
-				.setY((float) (centerY + 0.5*sizeY))
+				.setX((float) (centerX + (0.5*-sizeX)))
+				.setY((float) (centerY + (0.5*sizeY)))
 				.build());
 		
 		
@@ -73,8 +73,9 @@ public class EntityCollision {
 	private static double projectVectorToAxis(Vector vector, Vector axis) {
 		double change = VectorMath.scalar(vector, axis);
 		
-		
-		return Math.round((VectorMath.magnitude(vector)/Math.sin(90*Math.PI/180))*Math.sin((90*Math.PI/180)-change)*roundPlaces)/roundPlaces;
+		// rounded for some reason that might bite me back later idk tho havent slept in like 32 hours and im four monsters deep
+		//return Math.round((VectorMath.magnitude(vector)/Math.sin(90*Math.PI/180))*Math.sin((90*Math.PI/180)-change)*roundPlaces)/roundPlaces;
+		return ((VectorMath.magnitude(vector)/Math.sin(90*Math.PI/180))*Math.sin((90*Math.PI/180)-change));
 				
 	}
 	
