@@ -5,10 +5,12 @@ option java_outer_classname = "ServerToClientPacketProto";
 
 import "entity.proto";
 import "tile.proto";
+import "audio.proto";
 
 message ServerToClientPacket {
 	int32 mindId = 1;
 	map<string,Tile> tiles = 2;
 	repeated Entity entities = 3;
-	bool reconcile = 4;
+	repeated Audio sounds = 4;
+	bool reconcile = 5;
 }

@@ -5,8 +5,10 @@ option java_outer_classname = "ClientToServerPacketProto";
 
 import "entity.proto";
 import "action.proto";
+import "audio.proto";
 
 message ClientToServerPacket {
 	Entity updatedEntity = 1;
 	repeated Action actions = 2;
+	repeated Audio sounds = 3;
 }
