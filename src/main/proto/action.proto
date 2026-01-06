@@ -15,8 +15,15 @@ enum ActionType {
   StopY = 6;
 }
 
+enum InteractionType {
+	PickUp = 0;
+	Drop = 1;
+}
+
+
 message Action {
 	ActionType actionType = 1;
 	int32 interactingEntityId = 2;
 	Vector interactionPosition = 3;
+	InteractionType interactionType = 4;
 }
