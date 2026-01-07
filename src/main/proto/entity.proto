@@ -31,4 +31,7 @@ message Entity {
   string selectedSlot = 15;
   optional bool stackable = 16;
   optional int32 amount = 17;
+  optional float brightness = 18;
+  optional float lightRange = 19;
+  optional string hexColor = 20;
 }
