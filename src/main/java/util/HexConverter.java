@@ -2,7 +2,7 @@ package util;
 
 import java.awt.Color;
 
-public class HexAConverter {
+public class HexConverter {
 	public static Color convert(String hex) {
 		int r = Integer.valueOf(hex.substring(0, 2), 16);
 		int g = Integer.valueOf(hex.substring(2, 4), 16);
