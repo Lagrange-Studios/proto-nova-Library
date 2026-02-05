@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "ChatProto";
+
+enum ChatType {
+  Local = 0;
+  Whisper = 1;
+}
+
+message ChatMessage {
+	ChatType chatType = 1;
+	string message = 2;
+}
