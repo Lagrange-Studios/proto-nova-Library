@@ -4,6 +4,7 @@ option java_package = "protonova.protobuf";
 option java_outer_classname = "EntityProto";
 
 import "vector.proto";
+import "chat.proto";
 
 enum Direction {
 	Up = 0;
@@ -33,4 +34,5 @@ message Entity {
   optional int32 amount = 17;
   optional float lightRange = 18;
   optional string hexColor = 19;
+  repeated ChatMessage chatMessage = 20;
 }
