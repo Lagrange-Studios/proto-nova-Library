@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "EntityDataProto";
+
+import "entity.proto";
+
+message EntityData {
+	map<int32, Entity> data = 1;
+}
