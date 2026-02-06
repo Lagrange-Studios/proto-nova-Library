@@ -4,6 +4,7 @@ option java_package = "protonova.protobuf";
 option java_outer_classname = "ActionProto";
 
 import "vector.proto";
+import "chat.proto";
 
 enum ActionType {
   MoveUp = 0;
@@ -27,4 +28,5 @@ message Action {
 	int32 interactingEntityId = 2;
 	Vector interactionPosition = 3;
 	InteractionType interactionType = 4;
+	ChatMessage chatMessage = 5;
 }

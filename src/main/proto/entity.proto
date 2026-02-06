@@ -34,5 +34,5 @@ message Entity {
   optional int32 amount = 17;
   optional float lightRange = 18;
   optional string hexColor = 19;
-  optional ChatMessage chatMessage = 20;
+  repeated ChatMessage chatMessage = 20;
 }
