@@ -6,6 +6,7 @@ option java_outer_classname = "ServerToClientPacketProto";
 import "entity.proto";
 import "tile.proto";
 import "audio.proto";
+import "celestialObject.proto";
 
 message ServerToClientPacket {
 	int32 mindId = 1;
@@ -13,4 +14,5 @@ message ServerToClientPacket {
 	repeated Entity entities = 3;
 	repeated Audio sounds = 4;
 	bool reconcile = 5;
+	CelestialObject currentCelestialObject = 6;
 }
