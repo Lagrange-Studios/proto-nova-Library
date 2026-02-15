@@ -118,6 +118,12 @@ public class EntityCollision {
 	// Reference https://www.youtube.com/watch?v=dn0hUgsok9M
 	public static boolean checkCollision(Entity entity1, Entity entity2) {
 		
+		// simple distance check first
+		float hypotenuse1 = (float) Math.hypot(entity1.getSize().getX()/2, entity1.getSize().getY()/2);
+		float hypotenuse2 = (float) Math.hypot(entity2.getSize().getX()/2, entity2.getSize().getY()/2);
+		
+		if (hypotenuse1+hypotenuse2 < VectorMath.distance(entity1.getPosition(), entity2.getPosition())) return false;
+		
 		ArrayList<Vector> corners1 = getCorners(entity1);
 		ArrayList<Vector> corners2 = getCorners(entity2);
 		
