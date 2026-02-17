@@ -71,7 +71,7 @@ public class EntitySimulation {
 				.build();
 	}
 	
-	public static Entity simulateVelocity(Entity entity) {
+	public static Entity simulateVelocityXAxis(Entity entity) {
 		
 		Vector unitVector = entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0?VectorMath.unitVector(entity.getVelocity()): 
 			Vector.newBuilder()
@@ -79,8 +79,25 @@ public class EntitySimulation {
 			.setY(0)
 			.build();
 		
-		Vector position = Vector.newBuilder()
+		Vector position = entity.getPosition().toBuilder()
 				.setX((float) (entity.getPosition().getX() + entity.getSpeed()*unitVector.getX()/TPS))
+				.build();
+		
+		return entity.toBuilder()
+				.setPosition(position)
+				.build();
+		
+	}
+	
+	public static Entity simulateVelocityYAxis(Entity entity) {
+		
+		Vector unitVector = entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0?VectorMath.unitVector(entity.getVelocity()): 
+			Vector.newBuilder()
+			.setX(0)
+			.setY(0)
+			.build();
+		
+		Vector position = entity.getPosition().toBuilder()
 				.setY((float) (entity.getPosition().getY() + entity.getSpeed()*unitVector.getY()/TPS))
 				.build();
 		
