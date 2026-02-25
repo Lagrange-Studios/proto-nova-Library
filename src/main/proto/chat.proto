@@ -13,4 +13,6 @@ message ChatMessage {
 	string message = 2;
 	int32 time = 3;
 	int32 maxTime = 4;
+	int32 entityID = 5;
+	bool serverProssesed = 6;
 }
