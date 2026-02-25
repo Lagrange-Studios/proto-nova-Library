@@ -35,4 +35,5 @@ message Entity {
   optional float lightRange = 18;
   optional string hexColor = 19;
   repeated ChatMessage chatMessage = 20;
+  bool castShadow = 21;
 }
