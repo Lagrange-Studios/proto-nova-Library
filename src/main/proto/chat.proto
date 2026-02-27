@@ -3,6 +3,8 @@ syntax = "proto3";
 option java_package = "protonova.protobuf";
 option java_outer_classname = "ChatProto";
 
+import "vector.proto";
+
 enum ChatType {
   Local = 0;
   Whisper = 1;
@@ -11,8 +13,8 @@ enum ChatType {
 message ChatMessage {
 	ChatType chatType = 1;
 	string message = 2;
-	int32 time = 3;
-	int32 maxTime = 4;
-	int32 entityID = 5;
-	bool serverProssesed = 6;
+	int32 maxTime = 3;
+	int32 entityID = 4;
+	optional Vector position = 5;
+	int32 map = 8;
 }
