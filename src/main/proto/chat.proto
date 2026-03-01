@@ -17,4 +17,5 @@ message ChatMessage {
 	int32 entityID = 4;
 	optional Vector position = 5;
 	int32 map = 8;
+	uint64 chatID = 9;
 }
