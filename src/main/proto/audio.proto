@@ -5,17 +5,10 @@ option java_outer_classname = "AudioProto";
 
 import "vector.proto";
 
-enum AudioCondition {
-  Walking = 0;
-}
-
 message Audio {
-	int32 timeIntoAudio = 1;
 	string name = 2;
 	int32 volume = 3;
-	bool looping = 4;
 	optional Vector position = 5;
 	optional int32 entityID = 6;
-	optional AudioCondition audioCondition = 7;
 	int32 map = 8;
 }
