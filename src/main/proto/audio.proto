@@ -11,4 +11,5 @@ message Audio {
 	optional Vector position = 5;
 	optional int32 entityID = 6;
 	int32 map = 8;
+	uint64 audioID = 9;
 }
