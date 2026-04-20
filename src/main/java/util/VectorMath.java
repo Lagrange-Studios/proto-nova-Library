@@ -93,4 +93,17 @@ public class VectorMath {
 				.setY(position.getX())
 				.build();
 	}
+	
+	/**
+	 * Gets the distance between two vectors without the sqrt calculation (faster)
+	 * (x1-x2)^2 + (y1-y2)^2
+	 * Use this when comparing distances instead of getting actual distance value
+	 */
+	public static double distanceSquared(Vector position1, Vector position2) {
+		
+		double dx = position1.getX()-position2.getX();
+		double dy = position1.getY()-position2.getY();
+		return dx*dx + dy*dy;
+		
+	}
 }
