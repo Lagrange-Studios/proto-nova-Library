@@ -110,7 +110,7 @@ public class EntityCollision {
 				}
 			}
 		}
-		returningList.add(axis.getLast());
+		returningList.add(axis.get(axis.size() - 1));
 		
 		return returningList;
 	}
