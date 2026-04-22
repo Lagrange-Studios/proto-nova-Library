@@ -7,8 +7,10 @@ group = 'com.protonova'
 version = '1.0-SNAPSHOT'
 
 // Java version compatibility
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+java {
+	sourceCompatibility = JavaVersion.VERSION_11
+	targetCompatibility = JavaVersion.VERSION_11
+}
 
 repositories {
     mavenCentral()
