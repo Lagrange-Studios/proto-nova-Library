@@ -69,8 +69,3 @@ tasks.processResources {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     exclude('**/*.proto')
 }
-
-// Always regenerate proto files (can be optimized later)
-tasks.withType(com.google.protobuf.gradle.GenerateProtoTask).configureEach {
-    outputs.upToDateWhen { false }
-}
