@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "CraftingRecipeProto";
+
+
+message CraftingRecipe {
+	string item1Name = 1;
+	bool item1Consumed = 2;
+	optional bool item1MustBeHeld = 3;
+	
+	string item2Name = 4;
+	bool item2Consumed = 5;
+	
+	string result = 6;
+}
