@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "AudioProto";
+
+import "vector.proto";
+
+message Audio {
+	string name = 2;
+	int32 volume = 3;
+	optional Vector position = 5;
+	optional int32 entityID = 6;
+	int32 map = 8;
+	uint64 audioID = 9;
+}

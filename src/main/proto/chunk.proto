@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "ChunkProto";
+
+import "coordinate.proto";
+import "audio.proto";
+import "chat.proto";
+
+message Chunk {
+  Coordinate coordinate = 1;
+  repeated int32 entityIds = 2;
+  repeated Audio sounds = 3;
+  repeated ChatMessage chats = 4;
+}

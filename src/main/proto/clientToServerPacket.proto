@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "ClientToServerPacketProto";
+
+import "entity.proto";
+import "action.proto";
+import "audio.proto";
+import "chat.proto";
+
+message ClientToServerPacket {
+	Entity updatedEntity = 1;
+	repeated Action actions = 2;
+	repeated Audio sounds = 3;
+	repeated ChatMessage chatMessage = 4;
+}

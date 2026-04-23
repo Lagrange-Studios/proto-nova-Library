@@ -1,0 +1,71 @@
+plugins {
+    id 'java'
+    id 'com.google.protobuf' version '0.9.4'
+}
+
+group = 'com.protonova'
+version = '1.0-SNAPSHOT'
+
+// Java version compatibility
+java {
+	sourceCompatibility = JavaVersion.VERSION_11
+	targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.protobuf:protobuf-java:3.25.3'
+    
+    // Testing dependencies
+    testImplementation 'junit:junit:4.13.2'
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.25.3'
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {} // generate Java sources
+            }
+        }
+    }
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir 'src/main/proto'
+        }
+        java {
+            srcDir 'build/generated/source/proto/main/java'
+        }
+    }
+}
+
+// Ensure Java compilation depends on proto generation
+tasks.withType(JavaCompile) {
+    dependsOn tasks.withType(com.google.protobuf.gradle.GenerateProtoTask)
+}
+
+// Configure JAR manifest
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': project.name,
+            'Implementation-Version': project.version,
+            'Implementation-Vendor': 'Proto Nova',
+            'Created-By': System.getProperty('java.version')
+        )
+    }
+}
+
+// Exclude proto files from resources
+tasks.processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    exclude('**/*.proto')
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "ServerToClientPacketProto";
+
+import "entity.proto";
+import "tile.proto";
+import "audio.proto";
+import "celestialObject.proto";
+import "chat.proto";
+
+message ServerToClientPacket {
+	int32 mindId = 1;
+	map<string,Tile> tiles = 2;
+	repeated Entity entities = 3;
+	repeated Audio sounds = 4;
+	repeated ChatMessage chatMessage = 5;
+	bool reconcile = 6;
+	CelestialObject currentCelestialObject = 7;
+}

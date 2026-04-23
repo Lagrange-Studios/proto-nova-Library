@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "CelestialObjectProto";
+
+message CelestialObject {
+	double rotationPeroidMinutes = 1;
+	double currentRotation = 2;
+	int32 id = 3;
+	int32 surfacePlaneId = 4;
+	int32 tileWidth = 5;
+}

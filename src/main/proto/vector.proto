@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "VectorProto";
+
+message Vector {
+  float x = 1;
+  float y = 2;
+  
+}
