@@ -1,3 +1,32 @@
+# Build and compiled files
 /bin/
-/.gradle/
 /build/
+*.class
+*.jar
+*.war
+
+# Gradle
+.gradle/
+.gradle
+gradle-app.setting
+!gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+.vscode/
+.classpath
+.project
+.settings/
+*.swp
+*.swo
+*~
+
+# Generated files
+/extracted-include-protos/
+/extracted-protos/
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
