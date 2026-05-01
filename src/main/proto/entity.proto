@@ -34,4 +34,6 @@ message Entity {
   optional float lightRange = 18;
   optional string hexColor = 19;
   bool castShadow = 21;
+  optional string displayTexture = 22;
+  repeated string tags = 23;
 }
