@@ -20,6 +20,7 @@ enum InteractionType {
 	PickUp = 0;
 	Drop = 1;
 	Craft = 2;
+	Standard = 3;
 }
 
 
