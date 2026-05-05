@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "DamageProto";
+
+message Brute {
+	int32 damage = 1;
+}
+
+message Asphyxiation {
+	int32 damage = 1;
+}
+
+message Burn {
+	int32 damage = 1;
+}
+
+message Toxin {
+	int32 damage = 1;
+}
+
+message Genetic {
+	int32 damage = 1;
+}
+
+message Structural {
+	int32 damage = 1;
+}
+
+message Bleeding {
+	int32 damage = 1;
+	// BPT stands for Bleeding Per Tick, which is the amount of blood you loose per tick while bleeding.
+	double BPT = 2;
+}
+
+message Damage {
+	Brute brute = 2;
+	Asphyxiation asphyxiation = 3;
+	Burn burn = 4;
+	Toxin toxin = 5;
+	Genetic genetic = 6;
+	Structural structural = 7;
+	Bleeding bleeding = 8;
+}

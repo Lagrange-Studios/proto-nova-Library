@@ -4,6 +4,8 @@ option java_package = "protonova.protobuf";
 option java_outer_classname = "EntityProto";
 
 import "vector.proto";
+import "damage.proto";
+import "organs.proto";
 
 enum Direction {
 	Up = 0;
@@ -36,4 +38,6 @@ message Entity {
   bool castShadow = 21;
   optional string displayTexture = 22;
   repeated string tags = 23;
+  Damage damage = 24;
+  Organs organs = 25;
 }
