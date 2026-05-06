@@ -33,6 +33,16 @@ message Bleeding {
 	double BPT = 2;
 }
 
+message DamageMultiplier {
+    optional double brute = 1;
+    optional double asphyxiation = 2;
+    optional double burn = 3;
+    optional double toxin = 4;
+    optional double genetic = 5;
+    optional double structural = 6;
+    optional double bleeding = 7;
+}
+
 message Damage {
 	Brute brute = 2;
 	Asphyxiation asphyxiation = 3;
@@ -41,4 +51,5 @@ message Damage {
 	Genetic genetic = 6;
 	Structural structural = 7;
 	Bleeding bleeding = 8;
+	DamageMultiplier damageMultiplier = 9;
 }
