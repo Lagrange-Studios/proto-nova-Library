@@ -22,6 +22,14 @@ gradle-app.setting
 *.swo
 *~
 
+# Credentials and keys
+keystore.jks
+keystore.p12
+*.cer
+credentials.json
+proto-nova-cert.cer
+proto-nova-truststore.jks
+
 # Generated files
 /extracted-include-protos/
 /extracted-protos/
