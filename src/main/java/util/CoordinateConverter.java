@@ -7,6 +7,17 @@ public class CoordinateConverter {
 
 	public static final int CHUNK_SIZE = 10;
 	
+	public static String convert(String x, String y) {		
+		return x + "," + y;
+	}
+	
+	public static String convert(Vector position) {
+		String x = String.valueOf(Math.round(position.getX()));
+		String y = String.valueOf(Math.round(position.getY()));
+		
+		return x + "," + y;
+	}
+	
 	public static String convert(Coordinate coordinate) {
 		String x = String.valueOf(coordinate.getX());
 		String y = String.valueOf(coordinate.getY());
