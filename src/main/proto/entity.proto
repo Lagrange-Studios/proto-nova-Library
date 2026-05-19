@@ -40,4 +40,6 @@ message Entity {
   repeated string tags = 23;
   Damage damage = 24;
   Organs organs = 25;
+  double reach = 26;
+  HitDamage hitDamage = 27;
 }
