@@ -17,4 +17,5 @@ message ServerToClientPacket {
 	repeated ChatMessage chatMessage = 5;
 	bool reconcile = 6;
 	CelestialObject currentCelestialObject = 7;
+	repeated int32 removedEntities = 8;
 }
