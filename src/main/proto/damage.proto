@@ -4,32 +4,32 @@ option java_package = "protonova.protobuf";
 option java_outer_classname = "DamageProto";
 
 message DamageMultiplier {
-    optional double brute = 1;
-    optional double asphyxiation = 2;
-    optional double burn = 3;
-    optional double toxin = 4;
-    optional double genetic = 5;
-    optional double structural = 6;
-    optional double bleeding = 7;
+    optional float brute = 1;
+    optional float asphyxiation = 2;
+    optional float burn = 3;
+    optional float toxin = 4;
+    optional float genetic = 5;
+    optional float structural = 6;
+    optional float bleeding = 7;
 }
 
 message Damage {
-	int32 bruteDamage = 2;
-	int32 asphyxiationDamage = 3;
-	int32 burnDamage = 4;
-	int32 toxinDamage = 5;
-	int32 geneticDamage = 6;
-	int32 structuralDamage = 7;
-	double bleedingPerTick = 8;
+	float bruteDamage = 2;
+	float asphyxiationDamage = 3;
+	float burnDamage = 4;
+	float toxinDamage = 5;
+	float geneticDamage = 6;
+	float structuralDamage = 7;
+	float bleedingPerTick = 8;
 	DamageMultiplier damageMultiplier = 9;
 }
 
 message HitDamage {
-	optional int32 bruteDamage = 2;
-	optional int32 asphyxiationDamage = 3;
-	optional int32 burnDamage = 4;
-	optional int32 toxinDamage = 5;
-	optional int32 geneticDamage = 6;
-	optional int32 structuralDamage = 7;
-	optional double bleedingPerTick = 8;
+	optional float bruteDamage = 2;
+	optional float asphyxiationDamage = 3;
+	optional float burnDamage = 4;
+	optional float toxinDamage = 5;
+	optional float geneticDamage = 6;
+	optional float structuralDamage = 7;
+	optional float bleedingPerTick = 8;
 }

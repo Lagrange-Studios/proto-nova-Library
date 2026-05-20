@@ -27,7 +27,7 @@ message Entity {
   bool anchored = 9;
   bool canCollide = 10;
   Direction direction = 11;
-  int32 health = 12;
+  int32 critHealth = 12;
   int32 maxHealth = 13;
   Vector size = 14;
   string selectedSlot = 15;
@@ -42,4 +42,5 @@ message Entity {
   Organs organs = 25;
   double reach = 26;
   HitDamage hitDamage = 27;
+  bool alive = 28;
 }
