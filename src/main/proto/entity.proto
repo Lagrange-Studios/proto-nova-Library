@@ -43,4 +43,5 @@ message Entity {
   double reach = 26;
   HitDamage hitDamage = 27;
   bool alive = 28;
+  double maxSpeed = 29;
 }
