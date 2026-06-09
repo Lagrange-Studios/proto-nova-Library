@@ -32,4 +32,6 @@ message HitDamage {
 	optional float geneticDamage = 6;
 	optional float structuralDamage = 7;
 	optional float bleedingPerTick = 8;
+	optional int32 hitCooldown = 9;
+	bool canAttack = 10;
 }
