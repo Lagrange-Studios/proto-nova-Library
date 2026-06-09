@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "LootTableItemProto";
+
+
+message lootTableItem {
+	string itemName = 1;
+	// Out of 100% so 1 = 1% chance
+	double probability = 2;
+	optional int32 amount = 3;
+}

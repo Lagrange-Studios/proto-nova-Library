@@ -6,6 +6,7 @@ option java_outer_classname = "EntityProto";
 import "vector.proto";
 import "damage.proto";
 import "organs.proto";
+import "lootTableItem.proto";
 
 enum Direction {
 	Up = 0;
@@ -44,4 +45,6 @@ message Entity {
   HitDamage hitDamage = 27;
   bool alive = 28;
   double maxSpeed = 29;
+  bool dropsABody = 30;
+  repeated lootTableItem lootTable = 31;
 }
