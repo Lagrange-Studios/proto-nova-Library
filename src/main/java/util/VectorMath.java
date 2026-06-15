@@ -114,4 +114,12 @@ public class VectorMath {
 	public static Vector add(Vector vector1, Vector vector2) {
 		return Vector.newBuilder().setX(vector1.getX()+vector2.getX()).setY(vector1.getY()+vector2.getY()).build();
 	}
+	
+	/**
+	 * Subtracts two vectors together
+	 * @return The difference of the two vectors x1-x2,y1-y2
+	 */
+	public static Vector minus(Vector vector1, Vector vector2) {
+		return Vector.newBuilder().setX(vector1.getX()-vector2.getX()).setY(vector1.getY()-vector2.getY()).build();
+	}
 }
