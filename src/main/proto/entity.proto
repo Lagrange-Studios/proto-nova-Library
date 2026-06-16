@@ -47,4 +47,6 @@ message Entity {
   double maxSpeed = 29;
   bool dropsABody = 30;
   repeated lootTableItem lootTable = 31;
+  map<string,int32> internal = 32;
+  int32 internalSpace = 33;
 }
