@@ -9,4 +9,5 @@ message Tile {
   string name = 1;
   Coordinate coordinate = 2;
   int32 variant = 3;
+  optional string surfaceTexture = 4;
 }
