@@ -3,14 +3,19 @@ syntax = "proto3";
 option java_package = "protonova.protobuf";
 option java_outer_classname = "CraftingRecipeProto";
 
+message CraftingComponent {
+	string name = 1;
+	bool consumed = 2;
+	
+	map<string,int32> minimumSlotValue = 3;
+	repeated string tagsRequired = 4;
+}
 
 message CraftingRecipe {
-	string item1Name = 1;
-	bool item1Consumed = 2;
-	optional bool item1MustBeHeld = 3;
+	CraftingComponent item1 = 1;
+	optional bool item1MustBeHeld = 2;
 	
-	string item2Name = 4;
-	bool item2Consumed = 5;
+	CraftingComponent item2 = 3;
 	
-	string result = 6;
+	string result = 4;
 }
