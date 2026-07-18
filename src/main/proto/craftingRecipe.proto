@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "CraftingRecipeProto";
+
+message CraftingComponent {
+	string name = 1;
+	bool consumed = 2;
+	
+	map<string,int32> minimumSlotValue = 3;
+	repeated string tagsRequired = 4;
+}
+
+message CraftingRecipe {
+	CraftingComponent item1 = 1;
+	optional bool item1MustBeHeld = 2;
+	
+	CraftingComponent item2 = 3;
+	
+	string result = 4;
+	optional bool tileResult = 5;
+}

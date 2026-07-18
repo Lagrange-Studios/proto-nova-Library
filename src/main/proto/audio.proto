@@ -5,6 +5,13 @@ option java_outer_classname = "AudioProto";
 
 import "vector.proto";
 
+enum AudioType {
+	SOUND_EFFECT = 0;
+	AMBIENT = 1;
+	MUSIC = 2;
+	VOICE = 3;
+}
+
 message Audio {
 	string name = 2;
 	int32 volume = 3;
@@ -12,4 +19,6 @@ message Audio {
 	optional int32 entityID = 6;
 	int32 map = 8;
 	uint64 audioID = 9;
+	AudioType audioType = 10;
+	int32 durationMillis = 11;
 }

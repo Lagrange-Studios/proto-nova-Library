@@ -9,7 +9,6 @@ import util.VectorMath;
 
 public class EntitySimulation {
 	
-	public static final int TPS = 60;
 	public static final float accelerationModifer = 0.95f;
 	
 	/**
@@ -71,7 +70,7 @@ public class EntitySimulation {
 				.build();
 	}
 	
-	public static Entity simulateVelocityXAxis(Entity entity) {
+	public static Entity simulateVelocityXAxis(Entity entity, int TPS) {
 		
 		Vector unitVector = entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0?VectorMath.unitVector(entity.getVelocity()): 
 			Vector.newBuilder()
@@ -89,7 +88,7 @@ public class EntitySimulation {
 		
 	}
 	
-	public static Entity simulateVelocityYAxis(Entity entity) {
+	public static Entity simulateVelocityYAxis(Entity entity, int TPS) {
 		
 		Vector unitVector = entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0?VectorMath.unitVector(entity.getVelocity()): 
 			Vector.newBuilder()

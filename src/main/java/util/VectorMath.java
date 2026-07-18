@@ -106,4 +106,28 @@ public class VectorMath {
 		return dx*dx + dy*dy;
 		
 	}
+	
+	/**
+	 * Adds two vectors together
+	 * @return The sum of the two vectors x1+x2,y1+y2
+	 */
+	public static Vector add(Vector vector1, Vector vector2) {
+		return Vector.newBuilder().setX(vector1.getX()+vector2.getX()).setY(vector1.getY()+vector2.getY()).build();
+	}
+	
+	/**
+	 * Subtracts two vectors together
+	 * @return The difference of the two vectors x1-x2,y1-y2
+	 */
+	public static Vector minus(Vector vector1, Vector vector2) {
+		return Vector.newBuilder().setX(vector1.getX()-vector2.getX()).setY(vector1.getY()-vector2.getY()).build();
+	}
+	
+	/**
+	 * Multiplies two vectors
+	 * @return the vectors multiplied x1*x2,y1*y2
+	 */
+	public static Vector multiply(Vector vector1, Vector vector2) {
+		return Vector.newBuilder().setX(vector1.getX()*vector2.getX()).setY(vector1.getY()*vector2.getY()).build();
+	}
 }

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "OrgansProto";
+
+import "chemical.proto";
+
+message Heart {
+	float blood = 1;
+	float maxBlood = 2;
+}
+
+message Lungs {
+	int32 oxygen = 1;
+}
+
+message Liver {
+	// How fast it can detoxify chemicals, the higher the value the faster it can detoxify.
+	int32 detoxification = 1;
+}
+
+message Brain {
+	// Its just here for the sake of having a brain, it doesn't do anything yet.
+}
+
+message Stomach {
+	repeated int32 chemicals = 1;
+}
+
+message CardiovascularSystem {
+	repeated Chemical chemicals = 1;
+}
+
+message Organs {
+	Heart heart = 1;
+    Lungs lungs = 2;
+    Liver liver = 3;
+    Brain brain = 4;
+    Stomach stomach = 5;
+    CardiovascularSystem cardiovascularSystem = 6;
+}

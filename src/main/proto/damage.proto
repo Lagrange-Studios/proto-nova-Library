@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "DamageProto";
+
+message DamageMultiplier {
+    optional float brute = 1;
+    optional float asphyxiation = 2;
+    optional float burn = 3;
+    optional float toxin = 4;
+    optional float genetic = 5;
+    optional float structural = 6;
+    optional float bleeding = 7;
+}
+
+message Damage {
+	float bruteDamage = 2;
+	float asphyxiationDamage = 3;
+	float burnDamage = 4;
+	float toxinDamage = 5;
+	float geneticDamage = 6;
+	float structuralDamage = 7;
+	float bleedingPerTick = 8;
+	DamageMultiplier damageMultiplier = 9;
+}
+
+message HitDamage {
+	optional float bruteDamage = 2;
+	optional float asphyxiationDamage = 3;
+	optional float burnDamage = 4;
+	optional float toxinDamage = 5;
+	optional float geneticDamage = 6;
+	optional float structuralDamage = 7;
+	optional float bleedingPerTick = 8;
+	optional int32 hitCooldown = 9;
+	bool canAttack = 10;
+}
