@@ -1,153 +1,45 @@
 package collision;
 
-import java.util.ArrayList;
-
 import protonova.protobuf.EntityProto.Entity;
-import protonova.protobuf.VectorProto.Vector;
-import util.VectorMath;
 
-public class EntityCollision {
+/** Collision checks for the game's axis-aligned entity hitboxes. */
+public final class EntityCollision {
+    private EntityCollision() {}
 
-	private static int roundPlaces = 1000000000;
-	
-	private static ArrayList<Vector> getCorners(Entity entity) {
-		
-		ArrayList<Vector> corners = new ArrayList<Vector>();
-		
-		float centerX = entity.getPosition().getX();
-		float centerY = entity.getPosition().getY();
-		
-		float sizeX = entity.getSize().getX();
-		float sizeY = entity.getSize().getY();
-		
-		//TODO: take into account entity rotation
-		
-		
-		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + (0.5*-sizeX)))
-				.setY((float) (centerY + (0.5*-sizeY)))
-				.build());
-		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + (0.5*sizeX)))
-				.setY((float) (centerY + (0.5*-sizeY)))
-				.build());
-		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + (0.5*sizeX)))
-				.setY((float) (centerY + (0.5*sizeY)))
-				.build());
-		corners.add(Vector.newBuilder()
-				.setX((float) (centerX + (0.5*-sizeX)))
-				.setY((float) (centerY + (0.5*sizeY)))
-				.build());
-		
-		
-		return corners;
-	}
-	
-	private static ArrayList<Vector> getEdgeVectors(ArrayList<Vector> corners) {
-		
-		ArrayList<Vector> edgeVectors = new ArrayList<Vector>();
-		
-		for (int i=0;i<corners.size();i++) {
-			Vector corner = corners.get(i);
-			Vector corner2 = corners.get(i+1!=corners.size()?i+1:0); // I'm sorry -F
-			
-			edgeVectors.add(VectorMath.vectorDistance(corner, corner2));
-		}
-		return edgeVectors;
-	}
-	
-	// Could optimize if we stick with rectangle collision boxes
-	private static ArrayList<Vector> getNomralVectors(ArrayList<Vector> edgeVectors) {
-		
-		ArrayList<Vector> normalVectors = new ArrayList<Vector>();
-		
-		for (int i=0;i<edgeVectors.size();i++) {
-			Vector newNormal = VectorMath.normal(edgeVectors.get(i));
-			normalVectors.add(newNormal);
-		}
-		
-		return normalVectors;
-	}
-	
-	private static double projectVectorToAxis(Vector vector, Vector axis) {
-		double change = VectorMath.scalar(vector, axis);
-		
-		// rounded for some reason that might bite me back later idk tho havent slept in like 32 hours and im four monsters deep
-		//return Math.round((VectorMath.magnitude(vector)/Math.sin(90*Math.PI/180))*Math.sin((90*Math.PI/180)-change)*roundPlaces)/roundPlaces;
-		return ((VectorMath.magnitude(vector)/Math.sin(90*Math.PI/180))*Math.sin((90*Math.PI/180)-change));
-				
-	}
-	
-	
-	private static double[] findOuterPointsOnAxis(Vector axis, Object[] points) {
-		
-		double[] minMax = {Double.MAX_VALUE,-Double.MAX_VALUE};
-		
-		for (int i=0;i<points.length;i++) {
-			double projectedPoint = projectVectorToAxis((Vector) points[i],axis);
-			
-			minMax[0] = Math.min(projectedPoint, minMax[0]);
-			minMax[1] = Math.max(projectedPoint, minMax[1]);
-		}
-		
-		return minMax;
-	}
-	
-	private static ArrayList<Vector> removeDoubleAxis(ArrayList<Vector> axis) {
-		
-		ArrayList<Vector> returningList = new ArrayList<Vector>();
-		
-		for (int i=0;i<axis.size()-1;i++) {
-			for (int u=i+1;u<axis.size();u++) {
-				double scalarValue = VectorMath.scalar(axis.get(i), axis.get(u));
-				
-				if (scalarValue == Math.PI || scalarValue == 0) {
-					break;
-				}
-				else if (u == axis.size()-1) {
-					returningList.add(axis.get(i));
-				}
-			}
-		}
-		returningList.add(axis.get(axis.size() - 1));
-		
-		return returningList;
-	}
-	
-	// Reference https://www.youtube.com/watch?v=dn0hUgsok9M
-	/**
-	 * 
-	 * @return True if the entities are colliding
-	 */
-	public static boolean checkCollision(Entity entity1, Entity entity2) {
-		
-		// simple distance check first
-		float hypotenuse1 = (float) Math.hypot(entity1.getSize().getX()/2, entity1.getSize().getY()/2);
-		float hypotenuse2 = (float) Math.hypot(entity2.getSize().getX()/2, entity2.getSize().getY()/2);
-		
-		if (hypotenuse1+hypotenuse2 <= VectorMath.distance(entity1.getPosition(), entity2.getPosition())) return false;
-		
-		ArrayList<Vector> corners1 = getCorners(entity1);
-		ArrayList<Vector> corners2 = getCorners(entity2);
-		
-		ArrayList<Vector> axis = getNomralVectors(getEdgeVectors(corners1));
-		axis.addAll(getNomralVectors(getEdgeVectors(corners2)));
-		
-		axis = removeDoubleAxis(axis);
-		
-		for (int i=0;i<axis.size();i++) {
-			double[] points1 = findOuterPointsOnAxis(axis.get(i),corners1.toArray());
-			double[] points2 = findOuterPointsOnAxis(axis.get(i),corners2.toArray());
-			
-			if (points1[1] <= points2[0]) {
-				return false;
-			}
-			else if (points1[0] >= points2[1]) {
-				return false;
-			}
-		}
-		
-		return true;
-	}
+    /**
+     * Returns true only when the two hitboxes have positive overlapping area.
+     * Merely touching edges is allowed, which prevents entities from sticking
+     * after collision resolution places them directly beside one another.
+     */
+    public static boolean checkCollision(Entity first, Entity second) {
+        if (first == null || second == null) return false;
+
+        double firstWidth = first.getSize().getX();
+        double firstHeight = first.getSize().getY();
+        double secondWidth = second.getSize().getX();
+        double secondHeight = second.getSize().getY();
+        if (!isPositiveFinite(firstWidth) || !isPositiveFinite(firstHeight)
+                || !isPositiveFinite(secondWidth) || !isPositiveFinite(secondHeight)) return false;
+
+        double horizontalDistance = Math.abs(first.getPosition().getX() - second.getPosition().getX());
+        double verticalDistance = Math.abs(first.getPosition().getY() - second.getPosition().getY());
+        double combinedHalfWidths = (firstWidth + secondWidth) * 0.5;
+        double combinedHalfHeights = (firstHeight + secondHeight) * 0.5;
+
+        return horizontalDistance < combinedHalfWidths && verticalDistance < combinedHalfHeights;
+    }
+
+    /** Returns true when a movement increases the center distance from an obstacle. */
+    public static boolean isMovingAway(Entity before, Entity after, Entity obstacle) {
+        if (before == null || after == null || obstacle == null) return false;
+        double beforeX = before.getPosition().getX() - obstacle.getPosition().getX();
+        double beforeY = before.getPosition().getY() - obstacle.getPosition().getY();
+        double afterX = after.getPosition().getX() - obstacle.getPosition().getX();
+        double afterY = after.getPosition().getY() - obstacle.getPosition().getY();
+        return afterX * afterX + afterY * afterY > beforeX * beforeX + beforeY * beforeY;
+    }
+
+    private static boolean isPositiveFinite(double value) {
+        return value > 0 && Double.isFinite(value);
+    }
 }

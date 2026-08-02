@@ -10,6 +10,7 @@ import util.VectorMath;
 public class EntitySimulation {
 	
 	public static final float accelerationModifer = 0.95f;
+	private static final float ITEM_SLOWDOWN_PER_SECOND = 10.0f;
 	
 	/**
 	 * Should be called for every key input
@@ -71,15 +72,22 @@ public class EntitySimulation {
 	}
 	
 	public static Entity simulateVelocityXAxis(Entity entity, int TPS) {
-		
-		Vector unitVector = entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0?VectorMath.unitVector(entity.getVelocity()): 
-			Vector.newBuilder()
-			.setX(0)
-			.setY(0)
-			.build();
-		
+		float movementPerTick = 0;
+		if (TPS <= 0) {
+			return entity;
+		}
+		if (entity.getIsItem()) {
+			if (entity.getAnchored()) {
+				return entity;
+			}
+			movementPerTick = entity.getVelocity().getX() / TPS;
+		} else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
+			Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
+			movementPerTick = (float) (entity.getSpeed() * movementDirection.getX() / TPS);
+		}
+
 		Vector position = entity.getPosition().toBuilder()
-				.setX((float) (entity.getPosition().getX() + entity.getSpeed()*unitVector.getX()/TPS))
+				.setX(entity.getPosition().getX() + movementPerTick)
 				.build();
 		
 		return entity.toBuilder()
@@ -89,20 +97,57 @@ public class EntitySimulation {
 	}
 	
 	public static Entity simulateVelocityYAxis(Entity entity, int TPS) {
-		
-		Vector unitVector = entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0?VectorMath.unitVector(entity.getVelocity()): 
-			Vector.newBuilder()
-			.setX(0)
-			.setY(0)
-			.build();
-		
+		float movementPerTick = 0;
+		if (TPS <= 0) {
+			return entity;
+		}
+		if (entity.getIsItem()) {
+			if (entity.getAnchored()) {
+				return entity;
+			}
+			movementPerTick = entity.getVelocity().getY() / TPS;
+		} else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
+			Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
+			movementPerTick = (float) (entity.getSpeed() * movementDirection.getY() / TPS);
+		}
+
 		Vector position = entity.getPosition().toBuilder()
-				.setY((float) (entity.getPosition().getY() + entity.getSpeed()*unitVector.getY()/TPS))
+				.setY(entity.getPosition().getY() + movementPerTick)
 				.build();
 		
 		return entity.toBuilder()
 				.setPosition(position)
 				.build();
-		
+	}
+
+	public static Entity slowItemVelocity(Entity entity, int TPS) {
+		if (!entity.getIsItem() || entity.getAnchored() || TPS <= 0) {
+			return entity;
+		}
+
+		float currentVelocity = (float) VectorMath.magnitude(entity.getVelocity());
+		if (currentVelocity <= 0) {
+			return entity;
+		}
+
+		float remainingVelocity = currentVelocity - ITEM_SLOWDOWN_PER_SECOND / TPS;
+		if (remainingVelocity < 0.05f) {
+			remainingVelocity = 0;
+		}
+
+		Vector newVelocity;
+		if (remainingVelocity == 0) {
+			newVelocity = Vector.newBuilder().build();
+		} else {
+			float velocityRatio = remainingVelocity / currentVelocity;
+			newVelocity = entity.getVelocity().toBuilder()
+					.setX(entity.getVelocity().getX() * velocityRatio)
+					.setY(entity.getVelocity().getY() * velocityRatio)
+					.build();
+		}
+
+		return entity.toBuilder()
+				.setVelocity(newVelocity)
+				.build();
 	}
 }

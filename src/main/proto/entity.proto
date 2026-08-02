@@ -49,4 +49,9 @@ message Entity {
   repeated lootTableItem lootTable = 31;
   map<string,int32> internal = 32;
   int32 internalSpace = 33;
+  // Items can only receive attacks when this is enabled. Non-items ignore it.
+  bool canDestroy = 34;
+  OrganSlots organSlots = 35;
+  OrganAssetSlots organAssetSlots = 36;
+  OrganComponent organComponent = 37;
 }

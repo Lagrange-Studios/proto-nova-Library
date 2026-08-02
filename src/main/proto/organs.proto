@@ -5,30 +5,59 @@ option java_outer_classname = "OrgansProto";
 
 import "chemical.proto";
 
+enum OrganType {
+	ORGAN_TYPE_BIOLOGICAL = 0;
+	ORGAN_TYPE_CYBERNETIC = 1;
+}
+
+message OrganStatus {
+	optional float health = 1;
+	optional float efficiency = 2;
+	OrganType type = 3;
+	float powerUsePerSecond = 4;
+}
+
 message Heart {
 	float blood = 1;
 	float maxBlood = 2;
+	optional float circulationPerSecond = 3;
+	OrganStatus status = 4;
+	optional float oxygenUsePerSecond = 5;
 }
 
 message Lungs {
 	int32 oxygen = 1;
+	OrganStatus status = 2;
+	optional float oxygenUsePerSecond = 3;
 }
 
 message Liver {
-	// How fast it can detoxify chemicals, the higher the value the faster it can detoxify.
 	int32 detoxification = 1;
+	OrganStatus status = 2;
+	optional float oxygenUsePerSecond = 3;
 }
 
 message Brain {
-	// Its just here for the sake of having a brain, it doesn't do anything yet.
+	OrganStatus status = 1;
+	optional float oxygenUsePerSecond = 2;
 }
 
 message Stomach {
 	repeated int32 chemicals = 1;
+	OrganStatus status = 2;
+	optional float absorptionPerSecond = 3;
+	optional float oxygenUsePerSecond = 4;
+	repeated Chemical contents = 5;
+	optional float chemicalCapacity = 6;
 }
 
 message CardiovascularSystem {
 	repeated Chemical chemicals = 1;
+	float oxygen = 2;
+	optional float maxOxygen = 3;
+	float electricalPower = 4;
+	optional float maxElectricalPower = 5;
+	optional float fluidCapacity = 6;
 }
 
 message Organs {
@@ -38,4 +67,36 @@ message Organs {
     Brain brain = 4;
     Stomach stomach = 5;
     CardiovascularSystem cardiovascularSystem = 6;
+}
+
+// Runtime references owned by a living body. Every id points to a separately
+// spawned organ entity, so two bodies never share the same organ state.
+message OrganSlots {
+	optional int32 heartEntityId = 1;
+	optional int32 lungsEntityId = 2;
+	optional int32 liverEntityId = 3;
+	optional int32 brainEntityId = 4;
+	optional int32 stomachEntityId = 5;
+}
+
+// Asset names used while spawning a body. These become unique runtime ids in
+// OrganSlots and are not used by the physiology simulation directly.
+message OrganAssetSlots {
+	string heartAsset = 1;
+	string lungsAsset = 2;
+	string liverAsset = 3;
+	string brainAsset = 4;
+	string stomachAsset = 5;
+}
+
+// Data carried by an organ entity. Exactly one organ definition should be set.
+message OrganComponent {
+	oneof organ {
+		Heart heart = 1;
+		Lungs lungs = 2;
+		Liver liver = 3;
+		Brain brain = 4;
+		Stomach stomach = 5;
+	}
+	optional int32 installedInEntityId = 10;
 }
