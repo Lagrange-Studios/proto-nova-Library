@@ -12,10 +12,7 @@ public class CoordinateConverter {
 	}
 	
 	public static String convert(Vector position) {
-		String x = String.valueOf(Math.round(position.getX()));
-		String y = String.valueOf(Math.round(position.getY()));
-		
-		return x + "," + y;
+		return convert(toTileCoordinates(position));
 	}
 	
 	public static String convert(Coordinate coordinate) {
@@ -32,6 +29,24 @@ public class CoordinateConverter {
 				.build();
 		
 		return coordinate;
+	}
+
+	/** Converts a world or local position to the nearest tile-center coordinate. */
+	public static Coordinate toTileCoordinates(Vector vector) {
+		if (vector == null) return null;
+		return Coordinate.newBuilder()
+				.setX(Math.round(vector.getX()))
+				.setY(Math.round(vector.getY()))
+				.build();
+	}
+
+	/** Converts a world position into a position relative to an origin. */
+	public static Vector toLocalPosition(Vector worldPosition, Vector origin) {
+		if (worldPosition == null || origin == null) return null;
+		return Vector.newBuilder()
+				.setX(worldPosition.getX() - origin.getX())
+				.setY(worldPosition.getY() - origin.getY())
+				.build();
 	}
 	
 	public static Vector toVector(Coordinate coordinate) {

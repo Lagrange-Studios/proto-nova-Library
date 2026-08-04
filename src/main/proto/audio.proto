@@ -21,4 +21,6 @@ message Audio {
 	uint64 audioID = 9;
 	AudioType audioType = 10;
 	int32 durationMillis = 11;
+	bool looping = 12;
+	bool stop = 13;
 }

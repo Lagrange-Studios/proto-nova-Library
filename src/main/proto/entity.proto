@@ -54,4 +54,6 @@ message Entity {
   OrganSlots organSlots = 35;
   OrganAssetSlots organAssetSlots = 36;
   OrganComponent organComponent = 37;
+  // Higher values are rendered and selected above entities with lower values.
+  sint32 renderPriority = 38;
 }

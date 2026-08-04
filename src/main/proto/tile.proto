@@ -10,4 +10,5 @@ message Tile {
   Coordinate coordinate = 2;
   int32 variant = 3;
   optional string surfaceTexture = 4;
+  float movementDifficulty = 5;
 }

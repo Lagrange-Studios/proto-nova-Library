@@ -16,8 +16,12 @@ public class EntitySimulation {
 	 * Should be called for every key input
 	 */
 	public static Entity simulateMovement(Entity entity, Action action) {
+		return simulateMovement(entity, action, 1.0f);
+	}
+
+	public static Entity simulateMovement(Entity entity, Action action, float speedMultiplier) {
 		Vector velocity = entity.getVelocity();
-		float speed = (float) entity.getSpeed();
+		float speed = (float) entity.getSpeed() * validSpeedMultiplier(speedMultiplier);
 		float acceleration = speed*accelerationModifer;
 		
 		float newX = velocity.getX();
@@ -72,6 +76,10 @@ public class EntitySimulation {
 	}
 	
 	public static Entity simulateVelocityXAxis(Entity entity, int TPS) {
+		return simulateVelocityXAxis(entity, TPS, 1.0f);
+	}
+
+	public static Entity simulateVelocityXAxis(Entity entity, int TPS, float speedMultiplier) {
 		float movementPerTick = 0;
 		if (TPS <= 0) {
 			return entity;
@@ -83,7 +91,7 @@ public class EntitySimulation {
 			movementPerTick = entity.getVelocity().getX() / TPS;
 		} else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
 			Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
-			movementPerTick = (float) (entity.getSpeed() * movementDirection.getX() / TPS);
+			movementPerTick = (float) (entity.getSpeed() * validSpeedMultiplier(speedMultiplier) * movementDirection.getX() / TPS);
 		}
 
 		Vector position = entity.getPosition().toBuilder()
@@ -97,6 +105,10 @@ public class EntitySimulation {
 	}
 	
 	public static Entity simulateVelocityYAxis(Entity entity, int TPS) {
+		return simulateVelocityYAxis(entity, TPS, 1.0f);
+	}
+
+	public static Entity simulateVelocityYAxis(Entity entity, int TPS, float speedMultiplier) {
 		float movementPerTick = 0;
 		if (TPS <= 0) {
 			return entity;
@@ -108,7 +120,7 @@ public class EntitySimulation {
 			movementPerTick = entity.getVelocity().getY() / TPS;
 		} else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
 			Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
-			movementPerTick = (float) (entity.getSpeed() * movementDirection.getY() / TPS);
+			movementPerTick = (float) (entity.getSpeed() * validSpeedMultiplier(speedMultiplier) * movementDirection.getY() / TPS);
 		}
 
 		Vector position = entity.getPosition().toBuilder()
@@ -149,5 +161,9 @@ public class EntitySimulation {
 		return entity.toBuilder()
 				.setVelocity(newVelocity)
 				.build();
+	}
+
+	private static float validSpeedMultiplier(float speedMultiplier) {
+		return Float.isFinite(speedMultiplier) && speedMultiplier > 0 ? speedMultiplier : 1.0f;
 	}
 }
