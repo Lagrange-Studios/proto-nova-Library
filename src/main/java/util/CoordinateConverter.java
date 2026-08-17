@@ -57,4 +57,15 @@ public class CoordinateConverter {
 				
 		return vector;
 	}
+	
+	public static Coordinate toCoordinate(int x, int y) {
+		return Coordinate.newBuilder()
+				.setX(x)
+				.setY(y)
+				.build();
+	}
+	
+	public static Coordinate toCoordinate(float x, float y) {
+		return toCoordinate(Math.round(x),Math.round(y));
+	}
 }
