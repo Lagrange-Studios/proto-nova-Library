@@ -57,7 +57,9 @@ message CardiovascularSystem {
 	optional float maxOxygen = 3;
 	float electricalPower = 4;
 	optional float maxElectricalPower = 5;
-	optional float fluidCapacity = 6;
+	float nutrition = 6;
+	optional float maxNutrition = 7;
+	optional float fluidCapacity = 8;
 }
 
 message Organs {

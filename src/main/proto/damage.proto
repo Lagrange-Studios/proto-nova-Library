@@ -20,7 +20,7 @@ message Damage {
 	float toxinDamage = 5;
 	float geneticDamage = 6;
 	float structuralDamage = 7;
-	float bleedingPerTick = 8;
+	float bleedingPerSecond = 8;
 	DamageMultiplier damageMultiplier = 9;
 }
 
