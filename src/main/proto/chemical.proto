@@ -4,7 +4,7 @@ option java_package = "protonova.protobuf";
 option java_outer_classname = "ChemicalProto";
 
 message Chemical {
-	int32 id = 1;
+	int32 name = 1;
 	// 10u = 1 dose
 	float amount = 3;
 }

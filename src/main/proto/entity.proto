@@ -56,4 +56,5 @@ message Entity {
   OrganComponent organComponent = 37;
   // Higher values are rendered and selected above entities with lower values.
   sint32 renderPriority = 38;
+  int32 temperature = 39;
 }
