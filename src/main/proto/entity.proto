@@ -6,6 +6,7 @@ option java_outer_classname = "EntityProto";
 import "vector.proto";
 import "damage.proto";
 import "organs.proto";
+import "chemical.proto";
 import "lootTableItem.proto";
 
 enum Direction {
@@ -57,4 +58,5 @@ message Entity {
   // Higher values are rendered and selected above entities with lower values.
   sint32 renderPriority = 38;
   int32 temperature = 39;
+  repeated Chemical chemicals = 40;
 }

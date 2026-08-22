@@ -15,6 +15,7 @@ message OrganStatus {
 	optional float efficiency = 2;
 	OrganType type = 3;
 	float powerUsePerSecond = 4;
+	optional float nutritionUsePerSecond = 5;
 }
 
 message Heart {
@@ -43,7 +44,7 @@ message Brain {
 }
 
 message Stomach {
-	repeated int32 chemicals = 1;
+	repeated string chemicals = 1;
 	OrganStatus status = 2;
 	optional float absorptionPerSecond = 3;
 	optional float oxygenUsePerSecond = 4;

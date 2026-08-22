@@ -1,5 +1,6 @@
 package health;
 
+import protonova.protobuf.DamageProto.Damage;
 import protonova.protobuf.EntityProto.Entity;
 
 public class Health {
@@ -75,5 +76,25 @@ public class Health {
 		}
 	}
 	
+	public static Damage addTwoDamages(Damage damage1, Damage damage2) {
+		Damage.Builder finalDamage = damage1.toBuilder();
+		float brute = damage1.getBruteDamage() + damage2.getBruteDamage();
+		float burn = damage1.getBurnDamage() + damage2.getBurnDamage();
+		float toxin = damage1.getToxinDamage() + damage2.getToxinDamage();
+		float asphyxiation = damage1.getAsphyxiationDamage() + damage2.getAsphyxiationDamage();
+		float genetic = damage1.getGeneticDamage() + damage2.getGeneticDamage();
+		float structural = damage1.getStructuralDamage() + damage2.getStructuralDamage();
+		float bleeding = damage1.getBleedingPerSecond() + damage2.getBleedingPerSecond();
+		finalDamage
+			.setBruteDamage(brute)
+			.setBurnDamage(burn)
+			.setToxinDamage(toxin)
+			.setAsphyxiationDamage(asphyxiation)
+			.setGeneticDamage(genetic)
+			.setStructuralDamage(structural)
+			.setBleedingPerSecond(bleeding);
+		return finalDamage.build();
+	}
+
 	
 }
