@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "CustomDataProto";
+
+
+message CustomData {
+	int32 intValue = 1;
+	float floatValue = 2;
+	double doubleValue = 3;
+	bool booleanValue = 4;
+	string stringValue = 5;	
+}
