@@ -8,6 +8,7 @@ import "damage.proto";
 import "organs.proto";
 import "chemical.proto";
 import "lootTableItem.proto";
+import "customData.proto";
 
 enum Direction {
 	Up = 0;
@@ -60,4 +61,5 @@ message Entity {
   int32 temperature = 39;
   repeated Chemical chemicals = 40;
   bool consumable = 41;
+  map<string,CustomData> customData = 42;
 }
