@@ -60,5 +60,6 @@ message Entity {
   sint32 renderPriority = 38;
   int32 temperature = 39;
   repeated Chemical chemicals = 40;
-  map<string,CustomData> customData = 41;
+  bool consumable = 41;
+  map<string,CustomData> customData = 42;
 }
