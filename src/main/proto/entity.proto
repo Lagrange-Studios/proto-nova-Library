@@ -59,4 +59,5 @@ message Entity {
   sint32 renderPriority = 38;
   int32 temperature = 39;
   repeated Chemical chemicals = 40;
+  bool consumable = 41;
 }
