@@ -7,7 +7,7 @@ message CraftingComponent {
 	string name = 1;
 	bool consumed = 2;
 	
-	map<string,int32> minimumSlotValue = 3;
+	map<string,int32> minimumDataIntValue = 3;
 	repeated string tagsRequired = 4;
 }
 
