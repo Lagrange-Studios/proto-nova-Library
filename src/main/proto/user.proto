@@ -6,4 +6,5 @@ option java_outer_classname = "UserDataProto";
 
 message UserData {
 	string username = 1;
+	string joinTicket = 2;
 }

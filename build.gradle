@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.google.protobuf:protobuf-java:3.25.3'
+    implementation 'com.google.protobuf:protobuf-java:3.25.5'
     
     // Testing dependencies
     testImplementation 'junit:junit:4.13.2'
@@ -25,7 +25,7 @@ dependencies {
 
 protobuf {
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.25.3'
+        artifact = 'com.google.protobuf:protoc:3.25.5'
     }
     generateProtoTasks {
         all().each { task ->

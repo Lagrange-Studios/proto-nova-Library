@@ -23,4 +23,5 @@ message Audio {
 	int32 durationMillis = 11;
 	bool looping = 12;
 	bool stop = 13;
+	optional int32 originEntityID = 14;
 }

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "ServerHandshakeProto";
+
+message ServerHandshake {
+	int32 securityLevel = 1;
+	bytes challenge = 2;
+}
