@@ -23,6 +23,7 @@ enum InteractionType {
 	Consume = 4;
 	Standard = 5;
 	DropOne = 6;
+	Inventory = 7;
 }
 
 
@@ -31,4 +32,5 @@ message Action {
 	int32 interactingEntityId = 2;
 	Vector interactionPosition = 3;
 	InteractionType interactionType = 4;
+	string slotName = 5;
 }
