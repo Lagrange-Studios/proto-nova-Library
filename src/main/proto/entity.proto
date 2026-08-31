@@ -62,4 +62,5 @@ message Entity {
   repeated Chemical chemicals = 40;
   bool consumable = 41;
   map<string,CustomData> customData = 42;
+  double degreeRotation = 44;
 }
