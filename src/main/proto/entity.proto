@@ -63,4 +63,6 @@ message Entity {
   bool consumable = 41;
   map<string,CustomData> customData = 42;
   int32 attachedEntity = 43;
+  double degreeRotation = 44;
+>>>>>>> branch 'alpha' of https://github.com/Lagrange-Studios/proto-nova-Library.git
 }
