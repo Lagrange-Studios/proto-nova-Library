@@ -6,4 +6,7 @@ option java_outer_classname = "ServerHandshakeProto";
 message ServerHandshake {
 	int32 securityLevel = 1;
 	bytes challenge = 2;
+	string clientVersion = 3;
+	int32 clientDownloadPort = 4;
+	string clientManifestSha256 = 5;
 }

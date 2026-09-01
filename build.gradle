@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'com.google.protobuf' version '0.9.4'
+    id 'com.google.protobuf' version '0.10.0'
 }
 
 group = 'com.protonova'
@@ -32,17 +32,6 @@ protobuf {
             task.builtins {
                 java {} // generate Java sources
             }
-        }
-    }
-}
-
-sourceSets {
-    main {
-        proto {
-            srcDir 'src/main/proto'
-        }
-        java {
-            srcDir 'build/generated/source/proto/main/java'
         }
     }
 }
