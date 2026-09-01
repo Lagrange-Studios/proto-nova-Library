@@ -1,9 +1,11 @@
 syntax = "proto3";
 
-option java_package = "protonova.protobuf";
-option java_outer_classname = "ActionProto";
+package protonova;
 
 import "vector.proto";
+
+option java_package = "protonova.protobuf";
+option java_outer_classname = "ActionProto";
 
 enum ActionType {
   MoveUp = 0;
