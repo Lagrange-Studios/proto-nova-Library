@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package protonova;
+
 option java_package = "protonova.protobuf";
 option java_outer_classname = "ServerHandshakeProto";
 
@@ -9,4 +11,5 @@ message ServerHandshake {
 	string clientVersion = 3;
 	int32 clientDownloadPort = 4;
 	string clientManifestSha256 = 5;
+	int32 serverTicksPerSecond = 6;
 }

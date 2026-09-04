@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package protonova;
+
 option java_package = "protonova.protobuf";
 option java_outer_classname = "PlayerDataProto";
 
