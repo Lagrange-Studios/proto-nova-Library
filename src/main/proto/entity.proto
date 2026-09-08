@@ -66,4 +66,6 @@ message Entity {
   map<string,CustomData> customData = 42;
   int32 attachedEntity = 43;
   double degreeRotation = 44;
+  string displayName = 45;
+  string tag = 46;
 }
