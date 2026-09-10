@@ -21,4 +21,5 @@ message CraftingRecipe {
 	
 	string result = 4;
 	optional bool tileResult = 5;
+	optional int32 amountResult = 6;
 }
