@@ -8,242 +8,253 @@ import protonova.protobuf.VectorProto.Vector;
 import util.VectorMath;
 
 public class EntitySimulation {
-	
-	public static final float accelerationModifer = 0.95f;
-	private static final float ITEM_SLOWDOWN_PER_SECOND = 10.0f;
-	
-	/**
-	 * Should be called for every key input
-	 */
-	public static Entity simulateMovement(Entity entity, Action action) {
-		return simulateMovement(entity, action, 1.0f);
-	}
 
-	public static Entity simulateMovement(Entity entity, Action action, float speedMultiplier) {
-		Vector velocity = entity.getVelocity();
-		float speed = (float) entity.getSpeed() * validSpeedMultiplier(speedMultiplier);
-		float acceleration = speed*accelerationModifer;
-		
-		float newX = velocity.getX();
-		float newY = velocity.getY();
-		
-		Direction direction = entity.getDirection();
-		
-		
-		switch(action.getActionType().getNumber()) {
-			case ActionType.MoveUp_VALUE:
-				direction = Direction.Up;
-				if (velocity.getY() < speed) {
-					newY = Math.min(velocity.getY()+acceleration, speed);
-				}
-				break;
-			case ActionType.MoveDown_VALUE:
-				direction = Direction.Down;
-				if (velocity.getY() > -speed) {
-					newY = Math.max(velocity.getY()-acceleration, -speed);
-				}
-				break;
-			case ActionType.MoveRight_VALUE:
-				direction = Direction.Right;
-				if (velocity.getX() < speed) {
-					newX = Math.min(velocity.getX()+acceleration, speed);
-				}
-				break;
-			case ActionType.MoveLeft_VALUE:
-				direction = Direction.Left;
-				if (velocity.getX() > -speed) {
-					newX = Math.max(velocity.getX()-acceleration, -speed);
-				}
-				break;
-			case ActionType.StopX_VALUE:
-				newX = Math.abs(velocity.getX())>acceleration?velocity.getX()-Math.copySign(acceleration, velocity.getX()):0;
-				break;
-			case ActionType.StopY_VALUE:
-				newY = Math.abs(velocity.getY())>acceleration?velocity.getY()-Math.copySign(acceleration, velocity.getY()):0;
-				break;
-		}
-		
-		// apply velocity changes
-		velocity = Vector.newBuilder()
-				.setX(newX)
-				.setY(newY)
-				.build();
-		
-		return entity.toBuilder()
-				.setVelocity(velocity)
-				.setDirection(direction)
-				.build();
-	}
-	
-	public static Entity simulateVelocityXAxis(Entity entity, int TPS) {
-		return simulateVelocityXAxis(entity, TPS, 1.0f, 1.0f);
-	}
+  public static final float accelerationModifer = 0.95f;
+  private static final float ITEM_SLOWDOWN_PER_SECOND = 10.0f;
 
-	public static Entity simulateVelocityXAxis(Entity entity, int TPS, float speedMultiplier) {
-		float movementPerTick = 0;
-		if (TPS <= 0) {
-			return entity;
-		}
-		if (entity.getIsItem()) {
-			if (entity.getAnchored()) {
-				return entity;
-			}
-			movementPerTick = entity.getVelocity().getX() / TPS;
-		} else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
-			Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
-			movementPerTick = (float) (entity.getSpeed() * validSpeedMultiplier(speedMultiplier) * movementDirection.getX() / TPS);
-		}
+  /** Should be called for every key input */
+  public static Entity simulateMovement(Entity entity, Action action) {
+    return simulateMovement(entity, action, 1.0f);
+  }
 
-		Vector position = entity.getPosition().toBuilder()
-				.setX(entity.getPosition().getX() + movementPerTick)
-				.build();
-		
-		return entity.toBuilder()
-				.setPosition(position)
-				.build();
-		
-	}
+  public static Entity simulateMovement(Entity entity, Action action, float speedMultiplier) {
+    Vector velocity = entity.getVelocity();
+    float speed = (float) entity.getSpeed() * validSpeedMultiplier(speedMultiplier);
+    float acceleration = speed * accelerationModifer;
 
-	public static Entity simulateVelocityXAxis(Entity entity, int TPS, float speedMultiplier, float updateMultiplier) {
-		float movementPerTick = 0;
-		if (TPS <= 0) {
-			return entity;
-		}
-		if (entity.getIsItem()) {
-			if (entity.getAnchored()) {
-				return entity;
-			}
-			movementPerTick = entity.getVelocity().getX() / (TPS * updateMultiplier);
-		} else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
-			Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
-			movementPerTick = (float) (entity.getSpeed() * validSpeedMultiplier(speedMultiplier) * movementDirection.getX() / (TPS * updateMultiplier));
-		}
-		
-		Vector position = entity.getPosition().toBuilder()
-				.setX(entity.getPosition().getX() + movementPerTick)
-				.build();
-		
-		return entity.toBuilder()
-				.setPosition(position)
-				.build();
-	}
+    float newX = velocity.getX();
+    float newY = velocity.getY();
 
-	
-	public static Entity simulateVelocityYAxis(Entity entity, int TPS) {
-		return simulateVelocityYAxis(entity, TPS, 1.0f, 1.0f);
-	}
+    Direction direction = entity.getDirection();
 
-	public static Entity simulateVelocityYAxis(Entity entity, int TPS, float speedMultiplier) {
-		float movementPerTick = 0;
-		if (TPS <= 0) {
-			return entity;
-		}
-		if (entity.getIsItem()) {
-			if (entity.getAnchored()) {
-				return entity;
-			}
-			movementPerTick = entity.getVelocity().getY() / TPS;
-		} else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
-			Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
-			movementPerTick = (float) (entity.getSpeed() * validSpeedMultiplier(speedMultiplier) * movementDirection.getY() / TPS);
-		}
+    switch (action.getActionType().getNumber()) {
+      case ActionType.MoveUp_VALUE:
+        direction = Direction.Up;
+        if (velocity.getY() < speed) {
+          newY = Math.min(velocity.getY() + acceleration, speed);
+        }
+        break;
+      case ActionType.MoveDown_VALUE:
+        direction = Direction.Down;
+        if (velocity.getY() > -speed) {
+          newY = Math.max(velocity.getY() - acceleration, -speed);
+        }
+        break;
+      case ActionType.MoveRight_VALUE:
+        direction = Direction.Right;
+        if (velocity.getX() < speed) {
+          newX = Math.min(velocity.getX() + acceleration, speed);
+        }
+        break;
+      case ActionType.MoveLeft_VALUE:
+        direction = Direction.Left;
+        if (velocity.getX() > -speed) {
+          newX = Math.max(velocity.getX() - acceleration, -speed);
+        }
+        break;
+      case ActionType.StopX_VALUE:
+        newX =
+            Math.abs(velocity.getX()) > acceleration
+                ? velocity.getX() - Math.copySign(acceleration, velocity.getX())
+                : 0;
+        break;
+      case ActionType.StopY_VALUE:
+        newY =
+            Math.abs(velocity.getY()) > acceleration
+                ? velocity.getY() - Math.copySign(acceleration, velocity.getY())
+                : 0;
+        break;
+    }
 
-		Vector position = entity.getPosition().toBuilder()
-				.setY(entity.getPosition().getY() + movementPerTick)
-				.build();
-		
-		return entity.toBuilder()
-				.setPosition(position)
-				.build();
-	}
+    // apply velocity changes
+    velocity = Vector.newBuilder().setX(newX).setY(newY).build();
 
-	public static Entity simulateVelocityYAxis(Entity entity, int TPS, float speedMultiplier, float updateMultiplier) {
-		float movementPerTick = 0;
-		if (TPS <= 0) {
-			return entity;
-		}
-		if (entity.getIsItem()) {
-			if (entity.getAnchored()) {
-				return entity;
-			}
-			movementPerTick = entity.getVelocity().getY() / (TPS * updateMultiplier);
-		} else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
-			Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
-			movementPerTick = (float) (entity.getSpeed() * validSpeedMultiplier(speedMultiplier) * movementDirection.getY() / (TPS * updateMultiplier));
-		}
-		
-		Vector position = entity.getPosition().toBuilder()
-				.setY(entity.getPosition().getY() + movementPerTick)
-				.build();
-		
-		return entity.toBuilder()
-				.setPosition(position)
-				.build();
-	}
+    return entity.toBuilder().setVelocity(velocity).setDirection(direction).build();
+  }
 
-	public static Entity slowItemVelocity(Entity entity, int TPS) {
-		if (!entity.getIsItem() || entity.getAnchored() || TPS <= 0) {
-			return entity;
-		}
+  public static Entity simulateVelocityXAxis(Entity entity, int TPS) {
+    return simulateVelocityXAxis(entity, TPS, 1.0f, 1.0f);
+  }
 
-		float currentVelocity = (float) VectorMath.magnitude(entity.getVelocity());
-		if (currentVelocity <= 0) {
-			return entity;
-		}
+  public static Entity simulateVelocityXAxis(Entity entity, int TPS, float speedMultiplier) {
+    float movementPerTick = 0;
+    if (TPS <= 0) {
+      return entity;
+    }
+    if (entity.getIsItem()) {
+      if (entity.getAnchored()) {
+        return entity;
+      }
+      movementPerTick = entity.getVelocity().getX() / TPS;
+    } else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
+      Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
+      movementPerTick =
+          (float)
+              (entity.getSpeed()
+                  * validSpeedMultiplier(speedMultiplier)
+                  * movementDirection.getX()
+                  / TPS);
+    }
 
-		float remainingVelocity = currentVelocity - ITEM_SLOWDOWN_PER_SECOND / TPS;
-		if (remainingVelocity < 0.05f) {
-			remainingVelocity = 0;
-		}
+    Vector position =
+        entity.getPosition().toBuilder()
+            .setX(entity.getPosition().getX() + movementPerTick)
+            .build();
 
-		Vector newVelocity;
-		if (remainingVelocity == 0) {
-			newVelocity = Vector.newBuilder().build();
-		} else {
-			float velocityRatio = remainingVelocity / currentVelocity;
-			newVelocity = entity.getVelocity().toBuilder()
-					.setX(entity.getVelocity().getX() * velocityRatio)
-					.setY(entity.getVelocity().getY() * velocityRatio)
-					.build();
-		}
+    return entity.toBuilder().setPosition(position).build();
+  }
 
-		return entity.toBuilder()
-				.setVelocity(newVelocity)
-				.build();
-	}
+  public static Entity simulateVelocityXAxis(
+      Entity entity, int TPS, float speedMultiplier, float updateMultiplier) {
+    float movementPerTick = 0;
+    if (TPS <= 0) {
+      return entity;
+    }
+    if (entity.getIsItem()) {
+      if (entity.getAnchored()) {
+        return entity;
+      }
+      movementPerTick = entity.getVelocity().getX() / (TPS * updateMultiplier);
+    } else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
+      Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
+      movementPerTick =
+          (float)
+              (entity.getSpeed()
+                  * validSpeedMultiplier(speedMultiplier)
+                  * movementDirection.getX()
+                  / (TPS * updateMultiplier));
+    }
 
-	public static Entity slowItemVelocity(Entity entity, int TPS, float updateMultiplier) {
-		if (!entity.getIsItem() || entity.getAnchored() || TPS <= 0) {
-			return entity;
-		}
+    Vector position =
+        entity.getPosition().toBuilder()
+            .setX(entity.getPosition().getX() + movementPerTick)
+            .build();
 
-		float currentVelocity = (float) VectorMath.magnitude(entity.getVelocity());
-		if (currentVelocity <= 0) {
-			return entity;
-		}
+    return entity.toBuilder().setPosition(position).build();
+  }
 
-		float remainingVelocity = currentVelocity - ITEM_SLOWDOWN_PER_SECOND / (TPS * updateMultiplier);
-		if (remainingVelocity < 0.05f) {
-			remainingVelocity = 0;
-		}
+  public static Entity simulateVelocityYAxis(Entity entity, int TPS) {
+    return simulateVelocityYAxis(entity, TPS, 1.0f, 1.0f);
+  }
 
-		Vector newVelocity;
-		if (remainingVelocity == 0) {
-			newVelocity = Vector.newBuilder().build();
-		} else {
-			float velocityRatio = remainingVelocity / currentVelocity;
-			newVelocity = entity.getVelocity().toBuilder()
-					.setX(entity.getVelocity().getX() * velocityRatio)
-					.setY(entity.getVelocity().getY() * velocityRatio)
-					.build();
-		}
+  public static Entity simulateVelocityYAxis(Entity entity, int TPS, float speedMultiplier) {
+    float movementPerTick = 0;
+    if (TPS <= 0) {
+      return entity;
+    }
+    if (entity.getIsItem()) {
+      if (entity.getAnchored()) {
+        return entity;
+      }
+      movementPerTick = entity.getVelocity().getY() / TPS;
+    } else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
+      Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
+      movementPerTick =
+          (float)
+              (entity.getSpeed()
+                  * validSpeedMultiplier(speedMultiplier)
+                  * movementDirection.getY()
+                  / TPS);
+    }
 
-		return entity.toBuilder()
-				.setVelocity(newVelocity)
-				.build();
-	}
+    Vector position =
+        entity.getPosition().toBuilder()
+            .setY(entity.getPosition().getY() + movementPerTick)
+            .build();
 
-	private static float validSpeedMultiplier(float speedMultiplier) {
-		return Float.isFinite(speedMultiplier) && speedMultiplier > 0 ? speedMultiplier : 1.0f;
-	}
+    return entity.toBuilder().setPosition(position).build();
+  }
+
+  public static Entity simulateVelocityYAxis(
+      Entity entity, int TPS, float speedMultiplier, float updateMultiplier) {
+    float movementPerTick = 0;
+    if (TPS <= 0) {
+      return entity;
+    }
+    if (entity.getIsItem()) {
+      if (entity.getAnchored()) {
+        return entity;
+      }
+      movementPerTick = entity.getVelocity().getY() / (TPS * updateMultiplier);
+    } else if (entity.getVelocity().getX() != 0 || entity.getVelocity().getY() != 0) {
+      Vector movementDirection = VectorMath.unitVector(entity.getVelocity());
+      movementPerTick =
+          (float)
+              (entity.getSpeed()
+                  * validSpeedMultiplier(speedMultiplier)
+                  * movementDirection.getY()
+                  / (TPS * updateMultiplier));
+    }
+
+    Vector position =
+        entity.getPosition().toBuilder()
+            .setY(entity.getPosition().getY() + movementPerTick)
+            .build();
+
+    return entity.toBuilder().setPosition(position).build();
+  }
+
+  public static Entity slowItemVelocity(Entity entity, int TPS) {
+    if (!entity.getIsItem() || entity.getAnchored() || TPS <= 0) {
+      return entity;
+    }
+
+    float currentVelocity = (float) VectorMath.magnitude(entity.getVelocity());
+    if (currentVelocity <= 0) {
+      return entity;
+    }
+
+    float remainingVelocity = currentVelocity - ITEM_SLOWDOWN_PER_SECOND / TPS;
+    if (remainingVelocity < 0.05f) {
+      remainingVelocity = 0;
+    }
+
+    Vector newVelocity;
+    if (remainingVelocity == 0) {
+      newVelocity = Vector.newBuilder().build();
+    } else {
+      float velocityRatio = remainingVelocity / currentVelocity;
+      newVelocity =
+          entity.getVelocity().toBuilder()
+              .setX(entity.getVelocity().getX() * velocityRatio)
+              .setY(entity.getVelocity().getY() * velocityRatio)
+              .build();
+    }
+
+    return entity.toBuilder().setVelocity(newVelocity).build();
+  }
+
+  public static Entity slowItemVelocity(Entity entity, int TPS, float updateMultiplier) {
+    if (!entity.getIsItem() || entity.getAnchored() || TPS <= 0) {
+      return entity;
+    }
+
+    float currentVelocity = (float) VectorMath.magnitude(entity.getVelocity());
+    if (currentVelocity <= 0) {
+      return entity;
+    }
+
+    float remainingVelocity = currentVelocity - ITEM_SLOWDOWN_PER_SECOND / (TPS * updateMultiplier);
+    if (remainingVelocity < 0.05f) {
+      remainingVelocity = 0;
+    }
+
+    Vector newVelocity;
+    if (remainingVelocity == 0) {
+      newVelocity = Vector.newBuilder().build();
+    } else {
+      float velocityRatio = remainingVelocity / currentVelocity;
+      newVelocity =
+          entity.getVelocity().toBuilder()
+              .setX(entity.getVelocity().getX() * velocityRatio)
+              .setY(entity.getVelocity().getY() * velocityRatio)
+              .build();
+    }
+
+    return entity.toBuilder().setVelocity(newVelocity).build();
+  }
+
+  private static float validSpeedMultiplier(float speedMultiplier) {
+    return Float.isFinite(speedMultiplier) && speedMultiplier > 0 ? speedMultiplier : 1.0f;
+  }
 }
