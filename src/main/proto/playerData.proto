@@ -8,4 +8,10 @@ option java_outer_classname = "PlayerDataProto";
 message PlayerData {
   string username = 1;
   int32 entityId = 2;
+  repeated string knownEntities = 10;
+  repeated string seenEntities = 11;
+  // Track when this data was last sent to client
+  int64 lastSentTimestamp = 12;
+  // Track which entities have been sent to avoid resending
+  repeated string sentEntityIds = 13;
 }

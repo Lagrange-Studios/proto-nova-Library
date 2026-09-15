@@ -10,6 +10,7 @@ import "tile.proto";
 import "audio.proto";
 import "celestialObject.proto";
 import "chat.proto";
+import "playerData.proto";
 
 message ServerToClientPacket {
 	int32 mindId = 1;
@@ -21,4 +22,8 @@ message ServerToClientPacket {
 	CelestialObject currentCelestialObject = 7;
 	repeated int32 removedEntities = 8;
 	repeated string serverMessages = 9;
+	repeated Entity knownEntities = 10;
+	repeated Entity seenEntities = 11;
+	// Delta transmission support for player data
+	PlayerData playerDataDelta = 12;
 }
