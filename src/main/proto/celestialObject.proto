@@ -11,4 +11,5 @@ message CelestialObject {
 	int32 id = 3;
 	int32 surfacePlaneId = 4;
 	int32 tileWidth = 5;
+	int32 undergroundPlaneId = 6;
 }
